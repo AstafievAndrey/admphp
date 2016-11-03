@@ -1,0 +1,24 @@
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-sm-12'>
+            <a routerLink="/product/add" class='btn btn-primary'>
+                Добавить
+            </a>
+        </div>
+    </div>
+
+    <div class='row row-hookah' *ngFor='let product of products'>
+        <div class='col-sm-10 col-md-11'>
+            <p>
+                {{product.name}}<br>Цена:{{product.price}}<br>Статус:{{(product.active)?'активный':'на модерации'}}<br>
+            </p>
+        </div>
+        <div class='col-sm-2 col-md-1'>
+            <div class='btn btn-group-vertical'>
+                <a routerLink="/product/edit/{{product.id}}" class='btn btn-primary'><span class='glyphicon glyphicon-pencil'></span></a>
+                <a class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a>
+            </div>
+        </div>
+    </div>
+    
+</div>

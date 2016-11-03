@@ -1,0 +1,19 @@
+{
+    "postgres":
+            {
+                "type":"pgsql",
+                "dbname":"kalyan",
+                "host":"localhost",
+                "dbuser":"postgres",
+                "password":""
+            },
+    "mysql":
+            {
+                "type":"mysql",
+                "dbname":"mysql",
+                "host":"localhos",
+                "dbuser":"mysql",
+                "password":""
+            }
+}
+

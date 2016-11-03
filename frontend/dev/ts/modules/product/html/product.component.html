@@ -1,0 +1,66 @@
+<div class='container-fluid'>
+    <div class='row'>
+        <form class="form-horizontal" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Название</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name"  
+                           name="name" 
+                           required
+                           maxlength="150"
+                           placeholder="*не более 150 символов"
+                           [(ngModel)]="product.name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="short_desc" class="col-sm-2 control-label">Краткое описание</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="short_desc"  
+                           name="short_desc" 
+                           required
+                           maxlength="250"
+                           placeholder="*не более 250 символов"
+                           [(ngModel)]="product.short_desc">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="desc" class="col-sm-2 control-label">Полное описание</label>
+                <div class="col-sm-10">
+                    <textarea type="text" class="form-control" id="desc"  
+                           name="desc" 
+                           required
+                           maxlength="2500"
+                           placeholder="*не более 2500 символов"
+                           [(ngModel)]="product.desc"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price" class="col-sm-2 control-label">Цена</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="price"  
+                           name="price" 
+                           required
+                           pattern="[0-9]"
+                           maxlength="10"
+                           placeholder="*только числа не более 10 символов"
+                           [(ngModel)]="product.price">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="category_id" class="col-sm-2 control-label">Категория</label>
+                <div class="col-sm-10">
+                    <select id="category_id" name="category_id" class="form-control"
+                            [(ngModel)]="product.category_id">
+                        <option *ngFor="let categ of categoryService.getCategoriesProducts()" 
+                            value="{{categ.id}}">{{categ.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Сохранить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

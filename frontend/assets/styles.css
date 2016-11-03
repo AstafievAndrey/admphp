@@ -1,0 +1,10 @@
+.row-hookah{
+    background-color: #f5f5f5;
+    border: 1px solid #eee;
+    margin-top: 10px
+}
+
+.row-hookah .col-sm-1 .btn-group-vertical{
+    width: 100%;
+    text-align: center;
+}

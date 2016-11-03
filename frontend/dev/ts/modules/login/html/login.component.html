@@ -1,0 +1,17 @@
+<div class="container">
+    <form class="form-signin">
+        <h4 class="form-signin-heading">Пожалуйста пройдите авторизацию {{message}}</h4>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" 
+               name=""email
+               id="inputEmail" 
+               class="form-control" 
+               placeholder="Введите email" 
+               required 
+               autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+        <button class="btn btn-lg btn-primary btn-block" (click)="login()"  *ngIf="!authService.isLoggedIn">Войти</button>
+        <button class="btn btn-lg btn-primary btn-block" (click)="logout()" *ngIf="authService.isLoggedIn">Выйти</button>
+    </form>
+</div>

@@ -1,0 +1,221 @@
+<div class='container-fluid'>
+    <div class='row'>
+        <form class="form-horizontal" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Название</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name"  
+                           [(ngModel)]="shop.name" name="name" 
+                           required
+                           placeholder="Название">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address" class="col-sm-2 control-label">Адрес</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address" placeholder="Адрес"
+                        [(ngModel)]="shop.address"
+                        required
+                        name="address">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="col-sm-2 control-label">Телефон</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Телефон"
+                        required
+                        [(ngModel)]="shop.phone">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="site" class="col-sm-2 control-label">Сайт</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="site" id="site" placeholder="Сайт"
+                        [(ngModel)]="shop.site">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inst" class="col-sm-2 control-label">Инстаграм</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="inst" id="inst" placeholder="Инстаграм"
+                        [(ngModel)]="shop.inst">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="vk" class="col-sm-2 control-label">Вконтакте</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="vk" id="vk" placeholder="Страница в вконтакте"
+                        [(ngModel)]="shop.vk">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="city" class="col-sm-2 control-label">Город</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="city" id="city">
+                        <option *ngFor="let city of cityService.cities" 
+                            value="{{city.id}}">{{city.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="type" class="col-sm-2 control-label">Тип</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="type" id="type">
+                        <option *ngFor="let type of categoryService.types" 
+                            value="{{type.id}}">{{type.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="short_desc" class="col-sm-2 control-label">Краткое описание</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="short_desc" id="short_desc" 
+                        required
+                        placeholder="Краткое описание"
+                        [(ngModel)]="shop.short_desc">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="desc" class="col-sm-2 control-label">Полное описание</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="desc" id="desc" 
+                        required
+                        placeholder="Полное описание" 
+                        [(ngModel)]="shop.desc"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 col-xs-6">
+                    <label class="control-label">Парковка</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="parking" id="parking0" value="false"
+                            [(ngModel)]="shop.parking">
+                        Нет
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="parking" id="parking1"
+                            [(ngModel)]="shop.parking" value="true">
+                        Да
+                    </label>
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                    <label class="control-label">Веранда</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="veranda" id="veranda0" value="false"
+                            [(ngModel)]="shop.veranda">
+                        Нет
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="veranda" id="veranda1" value="true"
+                            [(ngModel)]="shop.veranda">
+                        Да
+                    </label>
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                    <label class="control-label">Алкоголь</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="alcohol" id="alcohol0" value="false"
+                            [(ngModel)]="shop.alcohol">
+                        Нет
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="alcohol" id="alcohol1" value="true"
+                            [(ngModel)]="shop.alcohol">
+                        Да
+                    </label>
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                    <label class="control-label">Еда</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="food" id="food0" value="false"
+                            [(ngModel)]="shop.food">
+                        Нет
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="food" id="food1" value="true"
+                            [(ngModel)]="shop.food">
+                        Да
+                    </label>
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                    <label class="control-label">Приставки</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="console" id="console0" value="false"
+                            [(ngModel)]="shop.console">
+                        Нет
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="console" id="console1" value="true"
+                            [(ngModel)]="shop.console">
+                        Да
+                    </label>
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                    <label class="control-label">Настольные игры</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="board" id="board0" value="false"
+                            [(ngModel)]="shop.board">
+                        Нет
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="board" id="board1" value="true"
+                            [(ngModel)]="shop.board">
+                        Да
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div *ngFor="let shed of shop.shedule" class="col-md-2 col-sm-3 col-xs-6">
+                    <strong>{{shed.name}}</strong>
+                    <div class="radio">
+                        <label><input type="radio" class="optradio1" [(ngModel)]="shed.type_work" value="1" name="optradio{{shed.id}}">Выходной</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" class="optradio1" [(ngModel)]="shed.type_work" value="2" name="optradio{{shed.id}}">Круглосуточно</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" class="optradio1" [(ngModel)]="shed.type_work" value="3" name="optradio{{shed.id}}">Время</label>
+                    </div>
+                    <div *ngIf="shed.type_work==='3'">От:
+                        <select name="work_b_{{shed.id}}" 
+                                [(ngModel)]="shed.work_begin" 
+                                id="work_b_{{shed.id}}"
+                                class="form-control">
+                            <option *ngFor="let number of numbers" 
+                                value="{{number}}">{{number}}
+                            </option>
+                        </select>
+                    </div>
+                    <div *ngIf="shed.type_work==='3'">
+                        До:
+                        <select name="work_e_{{shed.id}}" 
+                                [(ngModel)]="shed.work_end"
+                                id="work_e_{{shed.id}}"
+                                class="form-control">
+                            <option *ngFor="let number of numbers" 
+                                value="{{number}}">{{number}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Сохранить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

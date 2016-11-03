@@ -1,0 +1,11 @@
+{
+    "shop":
+            {
+                "src":"shop/main.php",
+                "auth":true
+            },
+    "auth":
+            {
+                "src":"auth/main.php"
+            }
+}
