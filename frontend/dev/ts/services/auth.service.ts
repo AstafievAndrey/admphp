@@ -22,11 +22,13 @@ export class AuthService {
             .map(response => response.json());
     }
 
-    login(): Observable<boolean> {
+    login(email,password): Observable<boolean> {
+        return this.http.post("//api.kalyan.space/auth", JSON.stringify({"email":email,"password":password}))
+            .map(response => response.json());
 //        this.http.get('http://api.kalyan.space/auth?email=admin@email.ru&password=password')
 //                    .map(this.extractData)
 //                    .catch(this.handleError);
-        return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
+//        return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
     }
     
 

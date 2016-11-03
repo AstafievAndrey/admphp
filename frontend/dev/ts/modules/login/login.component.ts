@@ -32,7 +32,15 @@ export class LoginComponent {
     }
 
     login(){
-        console.log(document.getElementById('inputEmail').);
+        let email = document.getElementById('inputEmail').value;
+        let password = document.getElementById('inputPassword').value;
+        this.authService.login(email,password)
+            .subscribe(
+                data => {
+                    console.log(data)
+                },
+                error => console.log("Error: " + error)
+            );
         return false;
 //        this.message = 'Trying to log in ...';
 //        this.authService.login().subscribe(() => {
