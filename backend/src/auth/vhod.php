@@ -1,6 +1,9 @@
 <?php
-$email = filter_input(INPUT_POST,"email");
-$password = base64_encode(md5(md5(filter_input(INPUT_POST,"password"))));
+//$email = filter_input(INPUT_POST,"email");
+//$password = base64_encode(md5(md5(filter_input(INPUT_POST,"password"))));
+$data = json_decode(file_get_contents('php://input'));
+$email = $data->email;
+$password = base64_encode(md5(md5($data->password)));
 
 $sql =  'SELECT t1.id, t1.enabled '
         . 'FROM auth.users t1 '
@@ -13,8 +16,7 @@ $sth->execute();
 $res = $sth->fetch(PDO::FETCH_ASSOC);
 
 if($res===false){
-    echo json_encode($_POST);die;
-//    Error::show("Пользователь не найден");
+    Error::show("Пользователь не найден");
 }
 
 if(!$res["enabled"]){
@@ -23,6 +25,8 @@ if(!$res["enabled"]){
 
 echo json_encode(
         array(
+            "id"=>$res["id"],
+            "email"=>$email,
             "token"=>Token::generateToken($res["id"])
         )
     );

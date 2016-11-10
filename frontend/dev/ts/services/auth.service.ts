@@ -1,38 +1,33 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable }       from '@angular/core';
+import { Http }             from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-
-export class User{   
-    token: string;
-}
+import { Observable }       from 'rxjs/Observable';
+import { CookieService }    from 'angular2-cookie/services/cookies.service';
+import { User }             from '../objects/user';
 
 @Injectable()
 export class AuthService {
-    isLoggedIn: boolean = false;
-
+    user: User;
+    obj:any;
     redirectUrl: string;
     
     foods;
     
-    constructor(private http:Http){}
-    
-    getData(): Observable<any> {
-        return this.http.get("http://api.kalyan.space/auth?email=admin@email.ru&password=password")
-            .map(response => response.json());
+    constructor(private http:Http,private cookie:CookieService){
+        this.obj = this.cookie.getObject("user");
+        if(this.cookie.getObject("user")!==undefined){
+            this.user = {id:this.obj.id,email:this.obj.email,token:this.obj.token};
+        }
     }
 
-    login(email,password): Observable<boolean> {
+    login(email,password): Observable<any> {
         return this.http.post("//api.kalyan.space/auth", JSON.stringify({"email":email,"password":password}))
             .map(response => response.json());
-//        this.http.get('http://api.kalyan.space/auth?email=admin@email.ru&password=password')
-//                    .map(this.extractData)
-//                    .catch(this.handleError);
-//        return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
     }
     
 
     logout(): void {
-        this.isLoggedIn = false;
+        this.cookie.removeAll();
+        this.user = undefined;
     }
 }

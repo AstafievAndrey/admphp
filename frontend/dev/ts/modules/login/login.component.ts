@@ -1,6 +1,8 @@
-import { Component }   from '@angular/core';
-import { Router }      from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Component }        from '@angular/core';
+import { Router }           from '@angular/router';
+import { AuthService }      from '../../services/auth.service';
+import { CookieService }    from 'angular2-cookie/services/cookies.service';
+import { User }             from '../../objects/user';
 
 @Component({
     templateUrl:'app/html/login.component.html',
@@ -12,47 +14,42 @@ export class LoginComponent {
     message: string;
     email:string;
     password:string;
+    error:string;
     
-    constructor(public authService: AuthService, public router: Router) {
+    constructor(public authService: AuthService, public router: Router,private cookie:CookieService) {
         this.setMessage();
     }
     
     setMessage() {
-        this.message = (this.authService.isLoggedIn ? 'Вы авторизованы' : 'kalyan.space');
+        this.message = (this.authService.user !==undefined ? 'Вы авторизованы' : 'kalyan.space');
     }
     
-    zapros(){
-        this.authService.getData()
-            .subscribe(
-                data => {
-                    console.log(data)
-                },
-                error => console.log("Error: " + error)
-            );
+    private setAuth(data:User){
+        this.cookie.putObject("user",{
+            id:data.id,
+            email:data.email,
+            token:data.token
+        });
+        
+        window.location = "/shop";
     }
-
+    
     login(){
         let email = document.getElementById('inputEmail').value;
         let password = document.getElementById('inputPassword').value;
         this.authService.login(email,password)
             .subscribe(
                 data => {
-                    console.log(data)
+                    if(data.error!==undefined){
+                        this.error = data.error;
+                    }else{
+                        this.setAuth(data);
+//                        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/shop';
+                    }
                 },
                 error => console.log("Error: " + error)
             );
         return false;
-//        this.message = 'Trying to log in ...';
-//        this.authService.login().subscribe(() => {
-//            this.setMessage();
-//            if (this.authService.isLoggedIn) {
-//              // Get the redirect URL from our auth service
-//              // If no redirect has been set, use the default
-//              let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/shop';
-//              // Redirect the user
-//              this.router.navigate([redirect]);
-//            }
-//        });
     }
     
     logout() {

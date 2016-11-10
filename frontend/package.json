@@ -29,6 +29,7 @@
     "zone.js": "^0.6.23"
   },
   "devDependencies": {
+    "angular2-cookie": "^1.2.5",
     "browser-sync": "^2.16.0",
     "concurrently": "^2.2.0",
     "gulp": "^3.9.1",

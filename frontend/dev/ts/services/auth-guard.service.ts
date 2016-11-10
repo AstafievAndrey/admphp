@@ -6,10 +6,11 @@ import {
     CanActivateChild
 }                           from '@angular/router';
 import { AuthService }      from './auth.service';
+import { CookieService }    from 'angular2-cookie/services/cookies.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(private authService: AuthService, private router: Router,private cookie:CookieService) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let url: string = state.url;
@@ -22,7 +23,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
 
     checkLogin(url: string): boolean {
-        if (this.authService.isLoggedIn) { return true; }
+        if (this.authService.user !==undefined) { return true; }
 
         // Store the attempted URL for redirecting
         this.authService.redirectUrl = url;

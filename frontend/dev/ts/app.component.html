@@ -18,7 +18,7 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div [ngClass]="{'hidden':!authService.isLoggedIn}" class="col-sm-3 col-md-2 sidebar">
+        <div [ngClass]="{'hidden':(authService.user==undefined)}" class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a routerLink="/shop" routerLinkActive="active">Кальянные</a></li>
                 <li><a routerLink="/product" routerLinkActive="active">Товары/Услуги</a></li>
@@ -26,11 +26,11 @@
             </ul>
         </div>
         <div [ngClass]="{   
-                            'col-sm-12':!authService.isLoggedIn, 
-                            'col-sm-9':authService.isLoggedIn,
-                            'col-sm-offset-3':authService.isLoggedIn,
-                            'col-md-10':authService.isLoggedIn,
-                            'col-md-offset-2':authService.isLoggedIn,
+                            'col-sm-12':(authService.user==undefined), 
+                            'col-sm-9':(authService.user!=undefined),
+                            'col-sm-offset-3':(authService.user!=undefined),
+                            'col-md-10':(authService.user!=undefined),
+                            'col-md-offset-2':(authService.user!=undefined),
                             'main' : true
                         }">
             <router-outlet></router-outlet>

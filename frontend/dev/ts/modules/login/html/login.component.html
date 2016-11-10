@@ -13,5 +13,8 @@
         <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
         <button class="btn btn-lg btn-primary btn-block" (click)="login()"  *ngIf="!authService.isLoggedIn">Войти</button>
         <button class="btn btn-lg btn-primary btn-block" (click)="logout()" *ngIf="authService.isLoggedIn">Выйти</button>
+        <div class="alert alert-danger bounceInUp animated" role="alert" *ngIf="error" style="margin-top: 10px;">
+            {{error}}
+        </div>
     </form>
 </div>
