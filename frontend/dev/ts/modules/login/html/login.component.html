@@ -1,18 +1,19 @@
 <div class="container">
     <form class="form-signin" onsubmit="false">
-        <h4 class="form-signin-heading">Пожалуйста пройдите авторизацию {{message}}</h4>
-        <label for="inputEmail" class="sr-only">Email address</label>
+        <h4 class="form-signin-heading">{{message}}</h4>
+        <label for="inputEmail" class="sr-only" *ngIf="auth">Email address</label>
         <input type="email" 
                name=""email
                id="inputEmail" 
                class="form-control" 
                placeholder="Введите email" 
                required 
-               autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-        <button class="btn btn-lg btn-primary btn-block" (click)="login()"  *ngIf="!authService.isLoggedIn">Войти</button>
-        <button class="btn btn-lg btn-primary btn-block" (click)="logout()" *ngIf="authService.isLoggedIn">Выйти</button>
+               autofocus
+               *ngIf="auth">
+        <label for="inputPassword" class="sr-only" *ngIf="auth">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required *ngIf="auth">
+        <button class="btn btn-lg btn-primary btn-block" (click)="login()"  *ngIf="auth" >Войти</button>
+        <button class="btn btn-lg btn-primary btn-block" (click)="logout()" *ngIf="!auth">Выйти</button>
         <div class="alert alert-danger bounceInUp animated" role="alert" *ngIf="error" style="margin-top: 10px;">
             {{error}}
         </div>

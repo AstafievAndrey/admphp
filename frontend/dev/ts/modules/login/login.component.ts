@@ -15,13 +15,15 @@ export class LoginComponent {
     email:string;
     password:string;
     error:string;
+    auth:boolean;
     
     constructor(public authService: AuthService, public router: Router,private cookie:CookieService) {
         this.setMessage();
+        this.auth = (authService.user===undefined) ? true:false;
     }
     
     setMessage() {
-        this.message = (this.authService.user !==undefined ? 'Вы авторизованы' : 'kalyan.space');
+        this.message = (this.authService.user !==undefined ? 'Вы действительно хотите?' : 'Авторизация');
     }
     
     private setAuth(data:User){

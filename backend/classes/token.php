@@ -22,7 +22,7 @@ class Token{
         $sth->bindParam(":TOKEN", $token, PDO::PARAM_STR);
         $sth->execute();
         $res = $sth->fetch(PDO::FETCH_ASSOC);
-        if($res['res']==="1"){
+        if($res['res']===1){
             return array(
                 "id"=>$id,
                 "email"=>$email,

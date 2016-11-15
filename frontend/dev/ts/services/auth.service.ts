@@ -1,5 +1,6 @@
 import { Injectable }       from '@angular/core';
 import { Http }             from '@angular/http';
+import { Router }           from '@angular/router';
 
 import { Observable }       from 'rxjs/Observable';
 import { CookieService }    from 'angular2-cookie/services/cookies.service';
@@ -11,12 +12,20 @@ export class AuthService {
     obj:any;
     redirectUrl: string;
     
-    foods;
-    
-    constructor(private http:Http,private cookie:CookieService){
+    constructor(private http:Http,private cookie:CookieService,private router: Router){
         this.obj = this.cookie.getObject("user");
         if(this.cookie.getObject("user")!==undefined){
             this.user = {id:this.obj.id,email:this.obj.email,token:this.obj.token};
+        }
+    }
+    
+    checkAuth():Observable<any>{
+        if(this.user===undefined){
+            this.router.navigate(['/login']);
+            return;
+        }else{
+            return this.http.post("//api.kalyan.space/check", JSON.stringify({ "id": this.user.id,"email":this.user.email,"token":this.user.token}))
+                .map(response => response.json());
         }
     }
 
@@ -29,5 +38,6 @@ export class AuthService {
     logout(): void {
         this.cookie.removeAll();
         this.user = undefined;
+        this.router.navigate(['/login']);
     }
 }
