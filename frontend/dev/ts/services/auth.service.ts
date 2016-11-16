@@ -15,7 +15,7 @@ export class AuthService {
     constructor(private http:Http,private cookie:CookieService,private router: Router){
         this.obj = this.cookie.getObject("user");
         if(this.cookie.getObject("user")!==undefined){
-            this.user = {id:this.obj.id,email:this.obj.email,token:this.obj.token};
+            this.user = {id:this.obj.id,email:this.obj.email,token:this.obj.token,org_id:this.obj.org_id};
         }
     }
     

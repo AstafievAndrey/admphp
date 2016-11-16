@@ -18,6 +18,9 @@ if(is_null(filter_input(INPUT_SERVER,"REDIRECT_URL"))){
 }
 
 if(!is_null($router[$url[0]])){
+//var_dump($router[$url[0]]);
+    $data = json_decode(file_get_contents('php://input'));//принимаем что придет постом
+    $pdo = Db::getPdo(Config::getConfig("postgres"));//подключение к бд
     include_once 'src/'.$router[$url[0]]["src"];
 }else{
     Error::show("Undefined route");

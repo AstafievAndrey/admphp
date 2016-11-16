@@ -1,11 +1,11 @@
 <?php
 //$email = filter_input(INPUT_POST,"email");
 //$password = base64_encode(md5(md5(filter_input(INPUT_POST,"password"))));
-$data = json_decode(file_get_contents('php://input'));
+//$data = json_decode(file_get_contents('php://input'));
 $email = $data->email;
 $password = base64_encode(md5(md5($data->password)));
 
-$sql =  'SELECT t1.id, t1.enabled '
+$sql =  'SELECT t1.id, t1.enabled, t2.id org_id '
         . 'FROM auth.users t1 '
         . 'JOIN auth.organizations t2 ON t2.id = t1.organization_id '
         . 'WHERE t1.email = :EMAIL and t1.password = :PASSWORD';
@@ -27,7 +27,8 @@ echo json_encode(
         array(
             "id"=>$res["id"],
             "email"=>$email,
-            "token"=>Token::generateToken($res["id"])
+            "token"=>Token::generateToken($res["id"]),
+            "org_id"=>$res["org_id"]
         )
     );
 

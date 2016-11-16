@@ -30,7 +30,8 @@ export class LoginComponent {
         this.cookie.putObject("user",{
             id:data.id,
             email:data.email,
-            token:data.token
+            token:data.token,
+            org_id:data.org_id
         });
         
         window.location = "/shop";

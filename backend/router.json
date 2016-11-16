@@ -1,7 +1,7 @@
 {
-    "shop":
+    "listShop":
             {
-                "src":"shop/main.php",
+                "src":"shop/listShop.php",
                 "auth":true
             },
     "auth":

@@ -1,75 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Shop } from '../objects/shop';
+import { Injectable }       from '@angular/core';
+import { Http }             from '@angular/http';
+import { Observable }       from 'rxjs/Observable';
+import { AuthService }      from './auth.service';
 
 @Injectable()
 export class ShopService {
     
-    shops:Shop[];
+    constructor(private http:Http,private authService:AuthService){}
     
-    getShops(){
-            return [
-                {
-                    id: 1,
-                    enabled:1,
-                    name: "Name one",
-                    address:"Address one",
-                    phone:"Phone one",
-                    site:"Site one",
-                    inst:"Instagram one",
-                    vk:"Vk one",
-                    city_id:1,
-                    category_id:1,
-                    short_desc:'Short Description one',
-                    desc:'Description one',
-                    parking:"false",
-                    alcohol:"false",
-                    food:"false",
-                    veranda:"false",
-                    console:"false",
-                    board:"false",
-                    shedule:[   
-                                {id:0,name:"Понедельник",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:1,name:"Вторник",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:2,name:"Среда",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:3,name:"Четверг",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:4,name:"Пятница",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:5,name:"Суббота",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:6,name:"Воскресенье",type_work:"1",work_begin:"1",work_end:"24"}
-                            ],
-                    file:null
-                },
-                {
-                    id: 2,
-                    enabled:0,
-                    name: "Name two",
-                    address:"Address two",
-                    phone:"Phone two",
-                    site:"Site two",
-                    inst:"Instagram two",
-                    vk:"Vk two",
-                    city_id:1,
-                    category_id:1,
-                    short_desc:'Short Description two',
-                    desc:'Description two',
-                    parking:"false",
-                    alcohol:"false",
-                    food:"false",
-                    veranda:"false",
-                    console:"false",
-                    board:"false",
-                    shedule:[   
-                                {id:0,name:"Понедельник",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:1,name:"Вторник",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:2,name:"Среда",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:3,name:"Четверг",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:4,name:"Пятница",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:5,name:"Суббота",type_work:"1",work_begin:"1",work_end:"24"},
-                                {id:6,name:"Воскресенье",type_work:"1",work_begin:"1",work_end:"24"}
-                            ],
-                    file:null
-                }
-            
-            ];
+    listShop():Observable<any>{
+        console.log(this.authService.user);
+            return this.http.post("//api.kalyan.space/listShop", 
+                    JSON.stringify( this.authService.user))
+                .map(response => response.json());
     }
     
     getShop(id:number){
