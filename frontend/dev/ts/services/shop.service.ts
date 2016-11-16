@@ -9,7 +9,6 @@ export class ShopService {
     constructor(private http:Http,private authService:AuthService){}
     
     listShop():Observable<any>{
-        console.log(this.authService.user);
             return this.http.post("//api.kalyan.space/listShop", 
                     JSON.stringify( this.authService.user))
                 .map(response => response.json());

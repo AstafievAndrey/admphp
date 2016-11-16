@@ -21,7 +21,7 @@ import { EditShopComponent }         from './components/editShop.component';
         EditShopComponent
     ],
     providers: [
-        
+
     ],
     bootstrap:    [ ShopComponent ],
 })
