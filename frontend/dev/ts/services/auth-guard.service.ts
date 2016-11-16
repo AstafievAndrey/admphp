@@ -39,7 +39,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 },
                 error => console.log("Error: " + error)
             );
-        console.log(this.authService.user);
+            
         if (this.authService.user !==undefined) { return true; }
 
         // Store the attempted URL for redirecting

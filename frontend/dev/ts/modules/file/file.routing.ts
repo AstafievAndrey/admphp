@@ -8,7 +8,7 @@ const fileRoutes: Routes = [
     { 
         path: 'file',  
         component: FileComponent, 
-        canActivate: [AuthGuard],
+//        canActivate: [AuthGuard],
 //        children: [
 //            {
 //                path: '',

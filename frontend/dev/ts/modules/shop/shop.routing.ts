@@ -11,7 +11,6 @@ const shopRoutes: Routes = [
     { 
         path: 'shop',  
         component: ShopComponent, 
-        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
