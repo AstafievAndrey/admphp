@@ -15,10 +15,17 @@ export class AddShopComponent implements OnInit{
     
     shop:Shop;
     numbers:number[];
+    message:any;
     
     constructor(public cityService:CityService,public categoryService:CategoryService,private shopService:ShopService){
 //        this.numbers = Array(24).fill().map((x,i)=>i+1);//работает в браузерах поддерживающих EcmaScript 6
         this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+        this.clearShop();
+        this.message = {text:"success",class:"alert-success"};
+    }
+    
+    //очистим информацию по магазинам
+    clearShop(){
         this.shop = {
                         id: null,
                         enabled:1,
@@ -62,6 +69,8 @@ export class AddShopComponent implements OnInit{
         this.shopService.addShop(this.shop).subscribe(
             data =>{
                 console.log(data);
+                this.message = false;
+//                this.message = {text:"danger",class:"alert-danger"};
             }
         );
     }
