@@ -4,6 +4,7 @@ import { Shop } from '../../../objects/shop';
 
 import { CityService } from '../../../services/city.service';
 import { CategoryService } from '../../../services/category.service';
+import { ShopService } from '../../../services/shop.service';
 
 
 @Component({
@@ -15,12 +16,13 @@ export class AddShopComponent implements OnInit{
     shop:Shop;
     numbers:number[];
     
-    constructor(public cityService:CityService,public categoryService:CategoryService){
+    constructor(public cityService:CityService,public categoryService:CategoryService,private shopService:ShopService){
 //        this.numbers = Array(24).fill().map((x,i)=>i+1);//работает в браузерах поддерживающих EcmaScript 6
         this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
         this.shop = {
                         id: null,
-                        enabled:0,
+                        enabled:1,
+                        active:0,
                         name: null,
                         address:null,
                         phone:null,
@@ -56,7 +58,12 @@ export class AddShopComponent implements OnInit{
     }
         
     onSubmit(){
-        console.log(this.shop);
+//        console.log(this.shop);
+        this.shopService.addShop(this.shop).subscribe(
+            data =>{
+                console.log(data);
+            }
+        );
     }
     
 }

@@ -3,6 +3,9 @@ import { Http }             from '@angular/http';
 import { Observable }       from 'rxjs/Observable';
 import { AuthService }      from './auth.service';
 
+import { Shop } from '../objects/shop';
+
+
 @Injectable()
 export class ShopService {
     
@@ -14,10 +17,17 @@ export class ShopService {
                 .map(response => response.json());
     }
     
+    addShop(shop:Shop):Observable<any>{
+            return this.http.post("//api.kalyan.space/addShop", 
+                    JSON.stringify( { shop : shop, user : this.authService.user }))
+                .map(response => response.json());
+    }
+    
     getShop(id:number){
         return {
                 id: id,
                 enabled:1,
+                active:0,
                 name: 'тест',
                 address:'тест',
                 phone:'тест',

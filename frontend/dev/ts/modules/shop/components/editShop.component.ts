@@ -30,7 +30,12 @@ export class EditShopComponent implements OnInit{
     }
     
     onSubmit(){
-        console.log(this.shop);
+//        console.log(this.shop);
+        this.shopService.addShop(this.shop).subscribe(
+            data =>{
+                console.log(data);
+            }
+        );
     }
     
 }

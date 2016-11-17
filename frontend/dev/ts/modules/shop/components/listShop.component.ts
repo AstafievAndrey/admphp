@@ -9,9 +9,11 @@ export class ListShopComponent implements OnInit{
     
     shops:any[];
     
-    constructor(private shopService:ShopService){}
+    constructor(private shopService:ShopService){
+        this.shops = undefined;
+    }
     
-    ngOnInit(){
+    ngOnInit(){        
         this.shopService.listShop().subscribe(
             data=>{
                 this.shops = data;
