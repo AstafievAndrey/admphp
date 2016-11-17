@@ -23,7 +23,7 @@ export class EditShopComponent implements OnInit{
     
     ngOnInit():void{
         this.cityService.getCities();
-        this.categoryService.getCategories();
+        this.categoryService.getCategories(1);
         this.route.params.forEach((params:Params)=>{
             this.shop = this.shopService.getShop(params['id']);
         });

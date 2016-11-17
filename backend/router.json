@@ -4,6 +4,18 @@
                 "src":"shop/listShop.php",
                 "auth":true
             },
+    "addShop":
+            {
+                "src":"shop/addShop.php"
+            },
+    "listCity":
+            {
+                "src":"city/listCity.php"
+            },
+    "listCategory":
+            {
+                "src":"category/listCategory.php"
+            },
     "auth":
             {
                 "src":"auth/main.php"

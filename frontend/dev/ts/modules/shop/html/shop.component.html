@@ -51,7 +51,7 @@
             <div class="form-group">
                 <label for="city" class="col-sm-2 control-label">Город</label>
                 <div class="col-sm-10">
-                    <select class="form-control" name="city" id="city">
+                    <select class="form-control" name="city" id="city" [(ngModel)]="shop.city_id">
                         <option *ngFor="let city of cityService.cities" 
                             value="{{city.id}}">{{city.name}}</option>
                     </select>
@@ -60,8 +60,8 @@
             <div class="form-group">
                 <label for="type" class="col-sm-2 control-label">Тип</label>
                 <div class="col-sm-10">
-                    <select class="form-control" name="type" id="type">
-                        <option *ngFor="let type of categoryService.types" 
+                    <select class="form-control" name="type" id="type" [(ngModel)]="shop.category_id" >
+                        <option *ngFor="let type of categoryService.categories" 
                             value="{{type.id}}">{{type.name}}</option>
                     </select>
                 </div>

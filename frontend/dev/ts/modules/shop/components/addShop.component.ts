@@ -52,7 +52,7 @@ export class AddShopComponent implements OnInit{
     
     ngOnInit(){
         this.cityService.getCities();
-        this.categoryService.getCategories();
+        this.categoryService.getCategories(1);
     }
         
     onSubmit(){

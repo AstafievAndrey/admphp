@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../objects/category';
 
+import { Http }             from '@angular/http';
+import { Observable }       from 'rxjs/Observable';
+
 @Injectable()
 export class CategoryService {
     
     categories:Category[];
     
-    getCategories(){
-        console.log(this.categories);
-        if(this.categories===undefined){
-            this.categories = [
-                            {id:1,name:"Кальянная"},
-                            {id:2,name:"Магазин"},
-                            {id:3,name:"Другое"}
-                        ];
-        } 
+    constructor(private http:Http){}
+    
+    private listCategory(parent_id:number):Observable<any>{
+        return this.http.post("//api.kalyan.space/listCategory", JSON.stringify({"parent_id":parent_id}))
+                .map(response => response.json());
+    }
+    
+    getCategories(parent_id:number){
+        this.listCategory(parent_id)
+                .subscribe(
+                    data=>{
+                        this.categories = data;
+                    }
+                );
     }
     
     getCategoriesProducts():Category[]{
