@@ -15,11 +15,15 @@ export class EditShopComponent implements OnInit{
     
     shop:Shop;
     numbers:number[];
+    message:any;
+    disabled:boolean;
     
     constructor(public cityService:CityService,public categoryService:CategoryService,
                 private route: ActivatedRoute, private shopService:ShopService){
-                    this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
-                }
+        this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+        this.disabled = false;
+        this.message = {hide:true,text:"",class:""};
+    }
     
     ngOnInit():void{
         this.cityService.getCities();
@@ -31,11 +35,11 @@ export class EditShopComponent implements OnInit{
     
     onSubmit(){
 //        console.log(this.shop);
-        this.shopService.addShop(this.shop).subscribe(
-            data =>{
-                console.log(data);
-            }
-        );
+//        this.shopService.addShop(this.shop).subscribe(
+//            data =>{
+//                console.log(data);
+//            }
+//        );
     }
     
 }
