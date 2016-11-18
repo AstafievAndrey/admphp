@@ -16,12 +16,14 @@ export class AddShopComponent implements OnInit{
     shop:Shop;
     numbers:number[];
     message:any;
+    disabled:boolean;
     
     constructor(public cityService:CityService,public categoryService:CategoryService,private shopService:ShopService){
 //        this.numbers = Array(24).fill().map((x,i)=>i+1);//работает в браузерах поддерживающих EcmaScript 6
         this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
         this.clearShop();
-        this.message = {text:"success",class:"alert-success"};
+        this.disabled = false;
+        this.message = {hide:true,text:"",class:""};
     }
     
     //очистим информацию по магазинам
@@ -65,12 +67,19 @@ export class AddShopComponent implements OnInit{
     }
         
     onSubmit(){
-//        console.log(this.shop);
+        this.disabled = true;
         this.shopService.addShop(this.shop).subscribe(
             data =>{
-                console.log(data);
-                this.message = false;
-//                this.message = {text:"danger",class:"alert-danger"};
+                this.disabled = false;
+                if(data.error!==undefined){
+                    this.message = {hide:false,text:data.error,class:" alert alert-danger bounceInRight animated"};
+                }else{
+                    this.clearShop();
+                    this.message = {hide:false,text:"Cохранено",class:" alert alert-success bounceInRight animated"};
+                    setTimeout(() => {  
+                        this.message.hide = true;
+                    }, 2000);
+                }
             }
         );
     }

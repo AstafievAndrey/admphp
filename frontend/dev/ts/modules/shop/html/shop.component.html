@@ -213,13 +213,13 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Сохранить</button>
+                    <button type="submit" class="btn btn-default" [disabled]="disabled">Сохранить</button>
                 </div>
             </div>
         </form>
     </div>
-    <div [ngClass] = "['alert', 'bounceInRight', 'animated', message.class]"
-        *ngIf="message" style='width: 300px;position: absolute;top:10px;right:20px;'>
+    <div [ngClass] = "[message.class]"
+        [hidden]="message.hide" style='width: 300px;position: absolute;top:10px;right:20px;'>
             {{message.text}}
     </div>
 </div>

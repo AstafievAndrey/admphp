@@ -6,8 +6,16 @@
             },
     "addShop":
             {
-                "src":"shop/addShop.php"
+                "src":"shop/addShop.php",
+                "auth":true
             },
+    "getShop":
+            {
+                "src":"shop/addShop.php",
+                "auth":true
+            },
+            
+            
     "listCity":
             {
                 "src":"city/listCity.php"
