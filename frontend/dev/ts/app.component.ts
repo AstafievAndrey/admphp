@@ -11,7 +11,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent { 
     
     constructor(public authService: AuthService){
-        console.log(authService.user);
+//        console.log(authService.user);
     }
     
 }

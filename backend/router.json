@@ -11,8 +11,7 @@
             },
     "getShop":
             {
-                "src":"shop/addShop.php",
-                "auth":true
+                "src":"shop/getShop.php"
             },
             
             

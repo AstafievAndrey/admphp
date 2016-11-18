@@ -21,15 +21,26 @@ export class EditShopComponent implements OnInit{
     constructor(public cityService:CityService,public categoryService:CategoryService,
                 private route: ActivatedRoute, private shopService:ShopService){
         this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
-        this.disabled = false;
+        this.disabled = true;
         this.message = {hide:true,text:"",class:""};
+        this.shop = shopService.clearShop();
     }
     
     ngOnInit():void{
         this.cityService.getCities();
         this.categoryService.getCategories(1);
         this.route.params.forEach((params:Params)=>{
-            this.shop = this.shopService.getShop(params['id']);
+            this.shopService.getShop(params['id']).subscribe(
+                data =>{
+                    this.disabled = false;
+                    if(data.error!==undefined){
+                        this.message = {hide:false,text:data.error,class:" alert alert-danger bounceInRight animated"};
+                    }else{
+                        this.shop = data;
+                        console.log(data);
+                    }
+                }
+            );
         });
     }
     
