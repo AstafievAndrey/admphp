@@ -9,6 +9,11 @@
                 "src":"shop/addShop.php",
                 "auth":true
             },
+    "editShop":
+            {
+                "src":"shop/editShop.php",
+                "auth":true
+            },
     "getShop":
             {
                 "src":"shop/getShop.php"

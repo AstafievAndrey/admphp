@@ -23,6 +23,12 @@ export class ShopService {
                 .map(response => response.json());
     }
     
+    editShop(shop:Shop):Observable<any>{
+            return this.http.post("//api.kalyan.space/editShop", 
+                    JSON.stringify( { shop : shop, user : this.authService.user }))
+                .map(response => response.json());
+    }
+    
     //очистим информацию по магазинам
     clearShop():Shop{
         return {
