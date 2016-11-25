@@ -45,10 +45,18 @@ export class EditShopComponent implements OnInit{
     }
     
     onSubmit(){
-        console.log(this.shop);
+        this.disabled = true;
         this.shopService.editShop(this.shop).subscribe(
             data =>{
-                console.log(data);
+                this.disabled = false;
+                if(data.error!==undefined){
+                    this.message = {hide:false,text:data.error,class:" alert alert-danger bounceInRight animated"};
+                }else{
+                    this.message = {hide:false,text:"Cохранено",class:" alert alert-success bounceInRight animated"};
+                    setTimeout(() => {  
+                        this.message.hide = true;
+                    }, 2000);
+                }
             }
         );
     }

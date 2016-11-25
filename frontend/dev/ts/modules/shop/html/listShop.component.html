@@ -16,7 +16,7 @@
             <div class='col-sm-2 col-md-1'>
                 <div class='btn btn-group-vertical'>
                     <a routerLink="/shop/edit/{{shop.id}}" class='btn btn-primary'><span class='glyphicon glyphicon-pencil'></span></a>
-                    <a class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a>
+                    <a class='btn btn-danger' (click)="delete(this)"><span class='glyphicon glyphicon-trash'></span></a>
                 </div>
             </div>
         </div>
