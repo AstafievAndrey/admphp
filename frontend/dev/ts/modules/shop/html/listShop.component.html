@@ -7,7 +7,7 @@
         </div>
     </div>
     <div *ngIf="(shops !==undefined)">
-        <div class='row row-hookah'  *ngFor='let shop of shops'>
+        <div class='row row-hookah'  *ngFor='let shop of shops; let i = index;'>
             <div class='col-sm-10 col-md-11'>
                 <p>
                     {{shop.name}}<br>Адрес:{{shop.address}}<br>Телефон:{{shop.phone}}<br>Статус:{{(shop.active)?'активный':'проверка'}}
@@ -16,9 +16,13 @@
             <div class='col-sm-2 col-md-1'>
                 <div class='btn btn-group-vertical'>
                     <a routerLink="/shop/edit/{{shop.id}}" class='btn btn-primary'><span class='glyphicon glyphicon-pencil'></span></a>
-                    <a class='btn btn-danger' (click)="delete(this)"><span class='glyphicon glyphicon-trash'></span></a>
+                    <a class='btn btn-danger' (click)="del(i,shop.id)"><span class='glyphicon glyphicon-trash'></span></a>
                 </div>
             </div>
         </div>
+    </div>
+    <div [ngClass] = "[message.class]"
+        [hidden]="message.hide" style='width: 300px;position: absolute;top:10px;right:20px;'>
+            {{message.text}}
     </div>
 </div>

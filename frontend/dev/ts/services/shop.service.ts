@@ -29,6 +29,12 @@ export class ShopService {
                 .map(response => response.json());
     }
     
+    del(id:number):Observable<any>{
+        return this.http.post("//api.kalyan.space/deleteShop", 
+                    JSON.stringify( { shop : {id:id}, user : this.authService.user }))
+                .map(response => response.json());
+    }
+    
     //очистим информацию по магазинам
     clearShop():Shop{
         return {
