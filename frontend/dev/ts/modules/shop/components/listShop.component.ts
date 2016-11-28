@@ -9,6 +9,7 @@ export class ListShopComponent implements OnInit{
     
     shops:any[];
     message:any;
+    count:number = 1;
     
     constructor(private shopService:ShopService){
         this.shops = undefined;
@@ -32,7 +33,17 @@ export class ListShopComponent implements OnInit{
     ngOnInit(){        
         this.shopService.listShop().subscribe(
             data=>{
-                this.shops = data;
+                if(data.error=="Auth failed"){
+                    this.count++;
+                    if(this.count!=3){
+                        this.ngOnInit();
+                    }else{
+                        location.reload();
+                    }
+                }else{
+                    this.shops = data;
+                    this.count = 1;
+                }
             }
         );
     }
