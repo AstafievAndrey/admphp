@@ -87,10 +87,10 @@ if($sth->execute()){
         $sth = $pdo->prepare("DELETE FROM shops WHERE id = :ID");
         $sth->bindParam(":ID",$res[0]["id"],PDO::PARAM_INT);
         $sth->execute();
-        Error::show("Ошибка добавления категории");
+        s_error::show("Ошибка добавления категории");
     }
 }else{
-    Error::show("Ошибка добавления заведения");
+    s_error::show("Ошибка добавления заведения");
 }
 
 echo json_encode(array("data"=>$data,"food"=>$data->food));

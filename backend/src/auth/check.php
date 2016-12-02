@@ -10,7 +10,7 @@ $token = $data->token;
 $res = Token::checkToken($id, $email, $token);
 
 if($res===false){
-    Error::show("Auth failed");
+    s_error::show("Auth failed");
 }else{
     echo json_encode($res);
 }

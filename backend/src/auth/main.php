@@ -6,7 +6,7 @@ if(!isset($url[1])){
     if(file_exists($url[1].".php")){
         include_once $url[1].".php";
     }else{
-        Error::show("Ошибка роутинга");
+        s_error::show("Ошибка роутинга");
     }
 }
 

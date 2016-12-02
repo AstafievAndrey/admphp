@@ -34,7 +34,7 @@ if($sth->execute()){
     if($sth->execute()){
         $res["category_id"] = $sth->fetch(PDO::FETCH_ASSOC)["category_id"];
     }else{
-        Error::show("Ошибка выбора категории");
+        s_error::show("Ошибка выбора категории");
     }
     $sql = "SELECT t1.day_id-1 id, t2.name, t1.type_work, coalesce(t1.work_begin,1) work_begin, coalesce(t1.work_end,24) work_end "
             . "FROM shedule t1 "
@@ -45,10 +45,10 @@ if($sth->execute()){
     if($sth->execute()){
         $res["shedule"] = $sth->fetchAll(PDO::FETCH_ASSOC);
     }else{
-        Error::show("Ошибка при выборки графика работы");
+        s_error::show("Ошибка при выборки графика работы");
     }
 }else{
-    Error::show("Запись не найдена");
+    s_error::show("Запись не найдена");
 }
 
 echo json_encode($res);

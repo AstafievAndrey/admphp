@@ -1,5 +1,5 @@
 <?php
-ini_set("display_errors",0);
+ini_set("display_s_errors",0);
 error_reporting(E_ALL);
 header('Content-type: application/json');
 spl_autoload_register(function($class){
@@ -11,7 +11,7 @@ $config = json_decode(file_get_contents("config.json"),true);
 $router = json_decode(file_get_contents("router.json"),true);
 
 if(is_null(filter_input(INPUT_SERVER,"REDIRECT_URL"))){
-    Error::show("Empty Url");
+    s_error::show("Empty Url");
 }else{
     $url = explode("/", filter_input(INPUT_SERVER,"REDIRECT_URL"));
     array_splice($url, 0, 1);
@@ -29,12 +29,12 @@ if(!is_null($router[$url[0]])){
             $token = $data->token;
         }
         if(!Token::checkAuth($email, $token)){
-            Error::show("Auth failed");
+            s_error::show("Auth failed");
         }
     }
     include_once 'src/'.$router[$url[0]]["src"];
 }else{
-    Error::show("Undefined route");
+    s_error::show("Undefined route");
 }
 
 

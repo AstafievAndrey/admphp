@@ -3,4 +3,4 @@ frontend/app/*
 frontend/node_modules/*
 frontend/typings/*
 cloud/images/*
-
+.DS_Store
