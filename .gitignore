@@ -3,4 +3,7 @@ frontend/app/*
 frontend/node_modules/*
 frontend/typings/*
 cloud/images/*
-
+smartadmin/node_modules
+SmartAdminFull.zip
+full/
+smartadmin/dist
