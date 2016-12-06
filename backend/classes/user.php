@@ -27,7 +27,7 @@ class user {
             $this->idRole = $res["role_id"];
             $this->nameRole = $res["name_role"];
         }else{
-            Error::show("Error don't find User");
+            s_error::show("s_error don't find User");
         }
         
     }

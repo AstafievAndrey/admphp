@@ -5,7 +5,7 @@
                 "dbname":"kalyan",
                 "host":"localhost",
                 "dbuser":"postgres",
-                "password":""
+                "password":"postgres"
             },
     "mysql":
             {

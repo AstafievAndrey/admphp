@@ -16,11 +16,11 @@ $sth->execute();
 $res = $sth->fetch(PDO::FETCH_ASSOC);
 
 if($res===false){
-    Error::show("Пользователь не найден");
+    s_error::show("Пользователь не найден");
 }
 
 if(!$res["enabled"]){
-    Error::show("Пользователь заблокирован");
+    s_error::show("Пользователь заблокирован");
 }
 
 echo json_encode(

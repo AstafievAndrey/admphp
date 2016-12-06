@@ -54,14 +54,14 @@ if($sth->execute()){
     $sth->bindParam(":ID",$data->shop->id,PDO::PARAM_INT);
     $sth->bindParam(":CATEG_ID",$data->shop->category_id,PDO::PARAM_INT);
     if(!$sth->execute()){
-        Error::show("Не удалось обновить информацию по категориям заведения");
+        s_error::show("Не удалось обновить информацию по категориям заведения");
     }
     
     $sth = $pdo->prepare("INSERT INTO shops_categories(shop_id,category_id) VALUES(:SHOP_ID,:CATEG_ID)");
     $sth->bindParam(":SHOP_ID",$data->shop->id,PDO::PARAM_INT);
     $sth->bindParam(":CATEG_ID",$data->shop->category_id,PDO::PARAM_INT);
     if(!$sth->execute()){
-        Error::show("Не удалось обновить информацию по категориям заведения");
+        s_error::show("Не удалось обновить информацию по категориям заведения");
     }
     
     $sth = $pdo->prepare("DELETE FROM shedule WHERE shop_id = :ID");
@@ -84,7 +84,7 @@ if($sth->execute()){
             $sth->execute();
     }
 }else{
-    Error::show("Не удалось обновить информацию по заведению");
+    s_error::show("Не удалось обновить информацию по заведению");
 }
 
 echo json_encode(array("state"=>1));
