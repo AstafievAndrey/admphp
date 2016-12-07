@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "2.0.1",
     "@angular/router": "3.0.1",
     "X-editable": "github:vitalets/x-editable",
+    "angular2-cookie": "^1.2.5",
     "bootstrap": "^3.3.7",
     "bootstrap-colorpicker": "^2.3.5",
     "bootstrap-duallistbox": "github:istvan-ujjmeszaros/bootstrap-duallistbox",
