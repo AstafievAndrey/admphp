@@ -8,17 +8,21 @@ import {Router} from "@angular/router";
 
 export class LoginComponent implements OnInit {
     
-    email:string;
-    pass:string;
+    public validationOptions: any = {
+        messages: {
+            email: {email: 'E-mail введен не корректно', required: 'Пожалуйста, введите почтовый ящик'},
+            password: {required:'Пожалуйста, введите пароль'}
+        }
+    };
     
     constructor(private router: Router) { }
 
     ngOnInit() {
     }
 
-    login(event){
+    login(form:any){
         event.preventDefault();
-        console.log(this.email,this.pass);
+        console.log(form);
   //    this.router.navigate(['/dashboard/analytics'])
     }
 

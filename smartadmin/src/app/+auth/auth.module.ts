@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
+import { SmartadminValidationModule } from "../shared/forms/validation/smartadmin-validation.module";
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { LockedComponent } from './locked/locked.component';
@@ -12,6 +13,7 @@ import { AuthComponent } from './auth.component';
   imports: [
     CommonModule,
     FormsModule,
+    SmartadminValidationModule,
     routing,
   ],
   declarations: [LoginComponent, LockedComponent,
