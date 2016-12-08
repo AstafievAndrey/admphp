@@ -13,6 +13,11 @@ import 'rxjs/add/operator/do';
 export class JsonApiService {
 
   constructor(private http: Http) {}
+  
+    public post(url,params:any):Observable<any>{
+            return this.http.post(url, params)
+                .map(response => response.json());
+    }
 
   public fetch(url): Observable<any>{
     return this.http.get(this.getBaseUrl() + config.API_URL + url)

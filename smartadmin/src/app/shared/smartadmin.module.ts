@@ -15,8 +15,8 @@ import {
 import {PopoverModule} from "ng2-popover/src/index";
 
 import {JsonApiService} from './api'
-
-import {AuthService} from './api/auth'
+import {AuthService} from './api'
+import {AuthGuard} from './api'
 
 import {LayoutService} from './layout/layout.service'
 
@@ -81,7 +81,7 @@ import {UtilsModule} from "./utils/utils.module";
     // StatsModule,
 
   ],
-  providers: [JsonApiService, LayoutService, AuthService]
+  providers: [JsonApiService, LayoutService, AuthService, AuthGuard]
 
 })
 export class SmartadminModule {
