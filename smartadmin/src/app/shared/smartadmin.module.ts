@@ -1,7 +1,7 @@
 import {NgModule, ModuleWithProviders} from "@angular/core";
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpModule, XSRFStrategy, CookieXSRFStrategy} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
 
@@ -15,8 +15,6 @@ import {
 import {PopoverModule} from "ng2-popover/src/index";
 
 import {JsonApiService} from './api'
-import {AuthService} from './api'
-import {AuthGuard} from './api'
 
 import {LayoutService} from './layout/layout.service'
 
@@ -81,7 +79,7 @@ import {UtilsModule} from "./utils/utils.module";
     // StatsModule,
 
   ],
-  providers: [JsonApiService, LayoutService, AuthService, AuthGuard]
+  providers: [JsonApiService, LayoutService]
 
 })
 export class SmartadminModule {
@@ -89,7 +87,9 @@ export class SmartadminModule {
   static forRoot():ModuleWithProviders {
     return {
       ngModule: SmartadminModule,
-      providers: [JsonApiService, LayoutService, AuthService]
+      providers: [JsonApiService, LayoutService,
+        { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('token', 'Token') }
+      ]
     };
   }
 

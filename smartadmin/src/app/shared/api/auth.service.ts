@@ -15,8 +15,7 @@ export class AuthService {
     constructor(private http: Http) {}
     
     public login(form:any):Observable<any>{
-        console.log("auth login",form);
-        localStorage.setItem('colorSetting', '#a4509b');
+        // console.log("auth login",form);
         return this.http.post("//api.kalyan.space/auth", JSON.stringify({"email":'admin@admin.ru',"password":"password"}))
             .map(response => response.json());
     }

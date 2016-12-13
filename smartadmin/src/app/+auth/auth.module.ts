@@ -8,6 +8,8 @@ import { RegisterComponent } from './register/register.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import {routing} from "./auth.routing";
 import { AuthComponent } from './auth.component';
+import {CookieService} from "angular2-cookie/services/cookies.service";
+import {AuthService} from "../shared/api/auth.service";
 
 @NgModule({
   imports: [
@@ -17,6 +19,7 @@ import { AuthComponent } from './auth.component';
     routing,
   ],
   declarations: [LoginComponent, LockedComponent,
-    RegisterComponent, ForgotComponent, AuthComponent]
+    RegisterComponent, ForgotComponent, AuthComponent],
+  providers:[CookieService,AuthService]
 })
 export class AuthModule { }
