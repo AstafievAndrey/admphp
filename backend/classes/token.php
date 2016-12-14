@@ -26,7 +26,7 @@ class Token{
             return array(
                 "id"=>$id,
                 "email"=>$email,
-                "token"=>Token::generateToken($id,$conn)
+//                "token"=>Token::generateToken($id,$conn)
             );
         }else{
             return false;
@@ -35,8 +35,7 @@ class Token{
     
     public static function checkAuth($email,$token,$conn='postgres'){
         $pdo = Db::getPdo(Config::getConfig($conn));
-        $sth = $pdo->prepare("select 1 res from auth.users where email = :EMAIL and token = :TOKEN");
-        $sth->bindParam(":EMAIL", $email, PDO::PARAM_STR);
+        $sth = $pdo->prepare("select 1 res from auth.users where token = :TOKEN");
         $sth->bindParam(":TOKEN", $token, PDO::PARAM_STR);
         $sth->execute();
         $res = $sth->fetch(PDO::FETCH_ASSOC);

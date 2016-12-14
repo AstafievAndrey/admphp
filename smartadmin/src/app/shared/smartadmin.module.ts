@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {HttpModule, XSRFStrategy, CookieXSRFStrategy} from '@angular/http';
 import {RouterModule} from '@angular/router';
+import {CookieService} from "angular2-cookie/services/cookies.service";
 
 
 /*
@@ -87,7 +88,7 @@ export class SmartadminModule {
   static forRoot():ModuleWithProviders {
     return {
       ngModule: SmartadminModule,
-      providers: [JsonApiService, LayoutService,
+      providers: [JsonApiService, LayoutService, CookieService, 
         { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('token', 'Token') }
       ]
     };

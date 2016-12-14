@@ -23,12 +23,24 @@ if(!$res["enabled"]){
     s_error::show("Пользователь заблокирован");
 }
 
+$sql =  'SELECT t3.name '
+        . 'FROM auth.users_roles t1 '
+        . 'JOIN auth.users t2 ON t2.id = t1.user_id '
+        . 'JOIN auth.roles t3 ON t3.id = t1.role_id '
+        . 'WHERE t2.email = :EMAIL and t2.password = :PASSWORD';
+$sth = $pdo->prepare($sql);
+$sth->bindParam(":PASSWORD", $password, PDO::PARAM_STR);
+$sth->bindParam(":EMAIL", $email, PDO::PARAM_STR);
+$sth->execute();
+$roles = $sth->fetchAll(PDO::FETCH_ASSOC);
+
 echo json_encode(
         array(
             "id"=>$res["id"],
             "email"=>$email,
             "token"=>Token::generateToken($res["id"]),
-            "org_id"=>$res["org_id"]
+            "org_id"=>$res["org_id"],
+            "roles"=>$roles
         )
     );
 

@@ -25,17 +25,22 @@ export class LoginComponent implements OnInit {
     }
 
     login(form:any){
-        event.preventDefault();
-        console.log(form);
-        this.cookieService.put("token","test");
-        console.log(this.cookieService.get("token"));
         this.authService.login(form.value)
             .subscribe(
                 data => {
-                    console.log(data);
+                    if(data.s_error!==undefined){
+                        $.smallBox({
+                            title: "Ошибка авторизации",
+                            content: "<i class='fa fa-clock-o'></i> <i>"+data.s_error+"</i>",
+                            color: "#C46A69",
+                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                            timeout: 4000
+                        });
+                    }else{
+                        this.router.navigate(['/home'])
+                    }
                 }
             );
-  //    this.router.navigate(['/dashboard/analytics'])
     }
 
 }

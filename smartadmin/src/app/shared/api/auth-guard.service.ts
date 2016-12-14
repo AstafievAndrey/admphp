@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
 
     checkLogin(url: string): boolean {
-        
+        console.log(url);
 //        this.authService.checkAuth()
 //            .subscribe(
 //                data => {

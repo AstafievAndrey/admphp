@@ -1,7 +1,14 @@
 <?php
 ini_set("display_s_errors",0);
 error_reporting(E_ALL);
-header('Content-type: application/json');
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Token, X-Requested-With");
+header('P3P: CP="CAO PSA OUR"'); // Makes IE to support cookies
+header("Content-Type: application/json; charset=utf-8");
+
 spl_autoload_register(function($class){
     include 'classes/'.strtolower($class).'.php';
 });
@@ -21,15 +28,10 @@ if(!is_null($router[$url[0]])){
     $data = json_decode(file_get_contents('php://input'));//принимаем что придет постом
     $pdo = Db::getPdo(Config::getConfig("postgres"));//подключение к бд
     if(isset($router[$url[0]]["auth"])&&($router[$url[0]]["auth"]===true)){
-        if(isset($data->user)){
-            $email = $data->user->email;
-            $token = $data->user->token;
-        }else{
-            $email = $data->email;
-            $token = $data->token;
-        }
-        if(!Token::checkAuth($email, $token)){
-            s_error::show("Auth failed");
+        if(!is_null(filter_input(INPUT_SERVER,"HTTP_TOKEN"))){
+            if(!Token::checkAuth($token)){
+                s_error::show("Auth failed");
+            }
         }
     }
     include_once 'src/'.$router[$url[0]]["src"];

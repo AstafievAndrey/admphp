@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http, Response} from "@angular/http";
+import {CookieService} from "angular2-cookie/services/cookies.service";
 
 import {config} from '../smartadmin.config';
 import {Observable} from "rxjs/Rx";
@@ -12,11 +13,10 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class AuthService {
 
-    constructor(private http: Http) {}
+    constructor(private http: Http,private cookieService:CookieService) {}
     
     public login(form:any):Observable<any>{
-        // console.log("auth login",form);
-        return this.http.post("//api.kalyan.space/auth", JSON.stringify({"email":'admin@admin.ru',"password":"password"}))
+        return this.http.post("//api.kalyan.space/auth", form)
             .map(response => response.json());
     }
   
