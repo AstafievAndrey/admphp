@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit {
                             timeout: 4000
                         });
                     }else{
+                        this.cookieService.put("token",data.token);
+                        this.cookieService.putObject("user",{"roles":data.roles,"email":data.email});
                         this.router.navigate(['/home'])
                     }
                 }

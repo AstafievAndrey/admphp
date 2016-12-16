@@ -5,10 +5,19 @@ import {
     RouterStateSnapshot,
     CanActivateChild
 }                           from '@angular/router';
+import {CookieService} from "angular2-cookie/services/cookies.service";
+import {config} from '../smartadmin.config';
+
+import {JsonApiService} from "./json-api.service";
+
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router, 
+        private jsonApiService: JsonApiService,
+        private cookieService:CookieService
+    ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let url: string = state.url;
@@ -19,32 +28,21 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         return this.canActivate(route, state);
     }
+    
+    
 
     checkLogin(url: string): boolean {
         console.log(url);
-//        this.authService.checkAuth()
-//            .subscribe(
-//                data => {
-//                    if(data.error===undefined){
-//                        this.authService.user.token = data.token;
-//                        this.cookie.putObject("user",this.authService.user);
-//                        return true;
-//                    }else{
-//                        console.log(false);
-//                        this.authService.logout();
-//                    }
-////                    console.log(this.authService.user);
-//                },
-//                error => console.log("Error: " + error)
-//            );
-//            
-//        if (this.authService.user !==undefined) { return true; }
-//
-//        // Store the attempted URL for redirecting
-//        this.authService.redirectUrl = url;
-//
-//        // Navigate to the login page with extras
-        this.router.navigate(['/auth']);
-        return false;
+        this.jsonApiService.post("//api.kalyan.space/check",{}).subscribe(
+            data=>{
+                if(data.s_error!==undefined){
+                    this.router.navigate(['/auth']);
+                }else{
+                    this.cookieService.put("token",data.token);
+                    this.router.navigate([url]);
+                }
+            }
+        );
+        return true;
     }
 }
