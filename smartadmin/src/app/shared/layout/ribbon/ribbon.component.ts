@@ -16,4 +16,8 @@ export class RibbonComponent implements OnInit {
     this.layoutService.factoryReset()
   }
 
+  onToggle() {
+    this.layoutService.onCollapseMenu()
+  }
+
 }

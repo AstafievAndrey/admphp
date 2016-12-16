@@ -1,4 +1,6 @@
 import {Component, Input, ElementRef, AfterContentInit, OnInit} from '@angular/core';
+import {CookieService} from "angular2-cookie/services/cookies.service";
+import {CookieXSRFStrategy} from "@angular/http";
 
 declare var $: any;
 
@@ -25,7 +27,7 @@ export class DatatableComponent implements OnInit {
   @Input() public tableClass: string;
   @Input() public width: string = '100%';
 
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef,private cookieService:CookieService) {
   }
 
   ngOnInit() {
@@ -59,6 +61,8 @@ export class DatatableComponent implements OnInit {
         // }
       }
     }
+    options.ajax.headers = {'token':this.cookieService.get("token")};
+
 
     options = $.extend(options, {
 
