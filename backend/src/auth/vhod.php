@@ -36,7 +36,7 @@ $roles = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode(
         array(
-            "id"=>$res["id"],
+//            "id"=>$res["id"],
             "email"=>$email,
             "token"=>Token::generateToken($res["id"]),
             "org_id"=>$res["org_id"],

@@ -29,9 +29,12 @@ if(!is_null($router[$url[0]])){
     $pdo = Db::getPdo(Config::getConfig("postgres"));//подключение к бд
     if(isset($router[$url[0]]["auth"])&&($router[$url[0]]["auth"]===true)){
         if(!is_null(filter_input(INPUT_SERVER,"HTTP_TOKEN"))){
-            if(!Token::checkAuth($token)){
+            if(!Token::checkAuth(filter_input(INPUT_SERVER,"HTTP_TOKEN"))){
                 s_error::show("Auth failed");
-            }
+            }   
+            $user = new user(filter_input(INPUT_SERVER,"HTTP_TOKEN"));
+        }else{
+            s_error::show("Auth failed don't have token");
         }
     }
     include_once 'src/'.$router[$url[0]]["src"];
