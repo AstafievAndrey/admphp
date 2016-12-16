@@ -1,8 +1,9 @@
 <?php
 $where = null;
 $admin = false;
-$limit = 10;
-$offset = 0;
+$limit = is_null(filter_input(INPUT_POST,"length"))?1:filter_input(INPUT_POST,"length");
+$offset = is_null(filter_input(INPUT_POST,"start"))?1:filter_input(INPUT_POST,"start");
+$draw = is_null(filter_input(INPUT_POST,"draw"))?1:filter_input(INPUT_POST,"draw");
 if(!$user->haveRole("admin")){
     $admin = true;
     $where = " and organization_id = :ORG_ID ";
@@ -22,6 +23,15 @@ if(!$admin){
 
 $sth->execute();
 $res = $sth->fetchAll(PDO::FETCH_ASSOC);
-//echo json_encode($user->getAll());
-echo json_encode(array("draw"=>2,"recordsTotals"=>305,"data"=>$res));
 
+$sql = "SELECT count(*) cnt "
+        . "FROM shops t1 "
+        . "WHERE  t1.enabled = true $where ";
+$sth = $pdo->prepare($sql);
+if(!$admin){
+    $sth->bindParam(":ORG_ID", $user->org, PDO::PARAM_INT);
+}
+$sth->execute();
+$count = $sth->fetch(PDO::FETCH_ASSOC);
+
+echo json_encode(array("draw"=>$draw,"recordsTotals"=>$count["cnt"],  "recordsFiltered"=> $count["cnt"],"data"=>$res));
