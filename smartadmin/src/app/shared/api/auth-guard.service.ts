@@ -32,7 +32,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     
 
     checkLogin(url: string): boolean {
-        console.log(url);
         this.jsonApiService.post("//api.kalyan.space/check",{}).subscribe(
             data=>{
                 if(data.s_error!==undefined){
@@ -40,6 +39,9 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 }else{
                     this.cookieService.put("token",data.token);
                 }
+            },
+            error =>{
+                this.router.navigate(['/auth']);
             }
         );
         return true;

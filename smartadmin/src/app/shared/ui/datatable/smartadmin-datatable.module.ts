@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatatableComponent } from './datatable.component';
-import {HttpModule,XSRFStrategy, CookieXSRFStrategy} from '@angular/http';
+import {HttpModule} from '@angular/http';
 import {CookieService} from "angular2-cookie/services/cookies.service";
 
 // require('smartadmin-plugins/bower_components/datatables.net-colreorder-bs/css/colReorder.bootstrap.min.css');
@@ -12,6 +12,6 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
   ],
   declarations: [DatatableComponent],
   exports: [DatatableComponent,HttpModule],
-  providers: [CookieService,{ provide: XSRFStrategy, useValue: new CookieXSRFStrategy('token', 'Token') }]
+  providers: [CookieService]
 })
 export class SmartadminDatatableModule { }

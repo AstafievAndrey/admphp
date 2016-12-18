@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { shopRouting } from './shop.routing';
 import {SmartadminModule} from "../shared/smartadmin.module";
 import {ShopComponent} from "./shop.component";
+import { ListShopComponent }   from './components/listShop.component';
 import {SmartadminDatatableModule} from "../shared/ui/datatable/smartadmin-datatable.module";
 
 @NgModule({
@@ -12,6 +13,6 @@ import {SmartadminDatatableModule} from "../shared/ui/datatable/smartadmin-datat
       SmartadminDatatableModule,
       SmartadminModule
   ],
-  declarations: [ShopComponent]
+  declarations: [ShopComponent,ListShopComponent]
 })
 export class ShopModule { }

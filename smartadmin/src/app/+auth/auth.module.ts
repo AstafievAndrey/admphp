@@ -13,10 +13,10 @@ import {AuthService} from "../shared/api/auth.service";
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    SmartadminValidationModule,
-    routing,
+      CommonModule,
+      FormsModule,
+      SmartadminValidationModule,
+      routing,
   ],
   declarations: [LoginComponent, LockedComponent,
     RegisterComponent, ForgotComponent, AuthComponent],
