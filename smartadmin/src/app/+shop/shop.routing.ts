@@ -1,19 +1,23 @@
 import { Routes, RouterModule } from '@angular/router';
-// import {ShopComponent} from "./shop.component";
-import { ListShopComponent }        from './components/listShop.component';
+import {ListShopComponent} from "./components/listShop.component";
+import {AddShopComponent} from "./components/addShop.component";
 
 export const shopRoutes: Routes = [
     {
         path: '',
-        component: ListShopComponent,
+        redirectTo:'listShop',
         data: {
             pageTitle: 'Заведения'
         },
     },
     {
-        path: 'listShop',
-        component: ListShopComponent
+        path:'listShop',
+        component:ListShopComponent
     },
+    {
+        path:'addShop',
+        component:AddShopComponent
+    }
 ];
 
 export const shopRouting = RouterModule.forChild(shopRoutes);
