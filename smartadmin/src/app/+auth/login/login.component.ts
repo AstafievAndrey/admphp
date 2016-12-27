@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {CookieService} from "angular2-cookie/services/cookies.service";
 import {AuthService} from "../../shared/api/auth.service"
+import any = jasmine.any;
 
+declare var $:any;
 
 @Component({
   selector: 'app-login',
@@ -25,6 +27,18 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
     }
 
+    private checkAdmin(roles):boolean{
+        let res = false;
+        roles.forEach(
+            function (role) {
+                if(role.name=="admin"){
+                    res =  true;
+                }
+            }
+        );
+        return res;
+    }
+
     login(form:any){
         this.authService.login(form.value)
             .subscribe(
@@ -39,7 +53,7 @@ export class LoginComponent implements OnInit {
                         });
                     }else{
                         this.cookieService.put("token",data.token);
-                        this.cookieService.putObject("user",{"roles":data.roles,"email":data.email});
+                        this.cookieService.putObject("user",{"roles":data.roles,"email":data.email,"admin":this.checkAdmin(data.roles)});
                         this.router.navigate(['/home'])
                     }
                 }

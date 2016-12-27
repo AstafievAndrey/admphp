@@ -7,6 +7,8 @@ import {ShopComponent} from "./shop.component";
 import {ListShopComponent} from "./components/listShop.component";
 import {AddShopComponent} from "./components/addShop.component";
 import {SmartadminDatatableModule} from "../shared/ui/datatable/smartadmin-datatable.module";
+import {SmartadminEditorsModule} from "../shared/forms/editors/smartadmin-editors.module";
+import {SmartadminInputModule} from "../shared/forms/input/smartadmin-input.module";
 
 @NgModule({
   imports: [
@@ -14,6 +16,8 @@ import {SmartadminDatatableModule} from "../shared/ui/datatable/smartadmin-datat
       shopRouting,
       SmartadminValidationModule,
       SmartadminDatatableModule,
+      SmartadminEditorsModule,
+      SmartadminInputModule,
       SmartadminModule
   ],
   declarations: [ShopComponent,ListShopComponent,AddShopComponent]

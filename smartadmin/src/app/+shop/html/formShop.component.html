@@ -6,9 +6,66 @@
     <div class="row">
         <div class="col-sm-12">
 
-            <form #shopForm="ngForm" (ngSubmit)="login(loginForm)" novalidate="novalidate"
-                  class="smart-form client-form">
+            <form #shopForm="ngForm" (ngSubmit)="login(shopForm.value)" novalidate="novalidate"
+                  class="smart-form client-form" style="background: white;">
+
+                <fieldset *ngIf="user.admin==true">
+                    <legend>Параметры администратора</legend>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="label">Translit</label>
+                            <label class="input"> <i class="icon-append fa fa-qq"></i>
+                                <input type="text" name="translit" placeholder="Транслит"
+                                       required ngModel>
+                                <b class="tooltip tooltip-bottom-right">Транслит</b>
+                            </label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="label">Title</label>
+                            <label class="input"> <i class="icon-append fa fa-qq"></i>
+                                <input type="text" name="title" placeholder="Заголовок страницы"
+                                       required ngModel>
+                                <b class="tooltip tooltip-bottom-right">Title</b>
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="label">Description</label>
+                            <label class="input"> <i class="icon-append fa fa-qq"></i>
+                                <input type="text" name="seo_desc" placeholder="Описание страницы"
+                                       required ngModel>
+                                <b class="tooltip tooltip-bottom-right">Description</b>
+                            </label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="label">Keywords</label>
+                            <label class="input"> <i class="icon-append fa fa-qq"></i>
+                                <input type="text" name="seo_keywords" placeholder="Ключевые слова"
+                                       required ngModel>
+                                <b class="tooltip tooltip-bottom-right">Keywords</b>
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="label">Организация</label>
+                            <label class="input">
+                                <select type="text" name="city"
+                                        class="form-control"
+                                        required ngModel>
+                                    <option>Казань</option>
+                                </select>
+                                <b class="tooltip tooltip-top-right">
+                                    <i class="fa fa-lock txt-color-teal"></i> Организация
+                                </b>
+                            </label>
+                        </section>
+                    </div>
+                </fieldset>
+
                 <fieldset>
+                    <legend *ngIf="user.admin==true">Поля для пользователей</legend>
                     <div class="row">
                         <section class="col col-6">
                             <label class="label">Название</label>
@@ -34,6 +91,8 @@
                             <label class="label">Телефон</label>
                             <label class="input"> <i class="icon-append fa fa-phone"></i>
                                 <input type="text" name="phone" placeholder="Укажите ваш телефон"
+                                       saMaskedInput="(999) 999-9999"
+                                       saMaskedPlaceholder="X"
                                        required ngModel>
                                 <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Телефон
@@ -47,6 +106,34 @@
                                        required ngModel>
                                 <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Краткое описание
+                                </b>
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="label">Город</label>
+                            <label class="input">
+                                <select type="text" name="city"
+                                        class="form-control"
+                                       required ngModel>
+                                    <option>Казань</option>
+                                </select>
+                                <b class="tooltip tooltip-top-right">
+                                    <i class="fa fa-lock txt-color-teal"></i> Город
+                                </b>
+                            </label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="label">Категория</label>
+                            <label class="input">
+                                <select type="text" name="city"
+                                        class="form-control"
+                                        required ngModel>
+                                    <option>Казань</option>
+                                </select>
+                                <b class="tooltip tooltip-top-right">
+                                    <i class="fa fa-lock txt-color-teal"></i> Категория
                                 </b>
                             </label>
                         </section>
@@ -81,12 +168,186 @@
                             </b>
                         </label>
                     </section>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-2">
+                            <label class="radio">Алкоголь</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id="alcohol1" class="radiobox style-0"
+                                           name="alcohol"
+                                           value="true" ngModel>
+                                    <span>Да</span>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id="alcohol0" class="radiobox style-0"
+                                           name="alcohol"
+                                           value="false" ngModel>
+                                    <span>Нет</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <label class="radio">Еда</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0" checked="checked"
+                                           name="food"
+                                           value="true" ngModel>
+                                    <span>Да</span>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0"
+                                           name="food"
+                                           value="false" ngModel>
+                                    <span>Нет</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <label class="radio">Веранда</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0" checked="checked"
+                                           name="veranda"
+                                           value="true" ngModel>
+                                    <span>Да</span>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0"
+                                           name="veranda"
+                                           value="false" ngModel>
+                                    <span>Нет</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <label class="radio">Парковка</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0" checked="checked"
+                                           name="parking"
+                                           value="true" ngModel>
+                                    <span>Да</span>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0"
+                                           name="parking"
+                                           value="false" ngModel>
+                                    <span>Нет</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <label class="radio">Приставки</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0" checked="checked"
+                                           name="board"
+                                           value="true" ngModel>
+                                    <span>Да</span>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0"
+                                           name="board"
+                                           value="false" ngModel>
+                                    <span>Нет</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">
+                            <label class="radio">Игры</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0" checked="checked"
+                                        name="game"
+                                        value="true" ngModel>
+                                    <span>Да</span>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="radiobox style-0"
+                                           name="game"
+                                           value="false" ngModel>
+                                    <span>Нет</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <section>
+                        <label class="label">Полное описание</label>
+                        <label class="input">
+                            <textarea type="text" name="description" class="form-control"
+                                      style="max-width: 100%"
+                                      placeholder="Оставьте описание" rows="5"
+                                   required ngModel>
+                            </textarea>
+                        </label>
+                    </section>
+                    <section>
+                        <div class="form-group">
+                            <div *ngFor="let shed of shedule" class="col-md-2 col-sm-3 col-xs-6">
+                                <strong class="radio">{{shed.name}}</strong>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" class="radiobox style-0" [(ngModel)]="shed.type_work" value="1" name="optradio{{shed.id}}">
+                                        <span>Выходной</span>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" class="radiobox style-0" [(ngModel)]="shed.type_work" value="2" name="optradio{{shed.id}}">
+                                        <span>Круглосуточно</span>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" class="radiobox style-0" [(ngModel)]="shed.type_work" value="3" name="optradio{{shed.id}}">
+                                        <span>Время</span>
+                                    </label>
+                                </div>
+                                <div *ngIf="shed.type_work==='3'">От:
+                                    <select name="work_b_{{shed.id}}"
+                                            [(ngModel)]="shed.work_begin"
+                                            id="work_b_{{shed.id}}"
+                                            class="form-control">
+                                        <option *ngFor="let number of numbers"
+                                                value="{{number}}">{{number}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div *ngIf="shed.type_work==='3'">
+                                    До:
+                                    <select name="work_e_{{shed.id}}"
+                                            [(ngModel)]="shed.work_end"
+                                            id="work_e_{{shed.id}}"
+                                            class="form-control">
+                                        <option *ngFor="let number of numbers"
+                                                value="{{number}}">{{number}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </fieldset>
+
                 <footer>
                     <button type="submit" class="btn btn-primary">
                         Добавить
                     </button>
                 </footer>
+
             </form>
 
         </div>
