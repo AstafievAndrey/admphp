@@ -24,7 +24,10 @@
                 "src":"shop/getShop.php"
             },
             
-            
+    "listOrganizations":
+            {
+                "src":"organization/listOrganizations.php"
+            },
     "listCity":
             {
                 "src":"city/listCity.php"

@@ -9,17 +9,24 @@ import {AddShopComponent} from "./components/addShop.component";
 import {SmartadminDatatableModule} from "../shared/ui/datatable/smartadmin-datatable.module";
 import {SmartadminEditorsModule} from "../shared/forms/editors/smartadmin-editors.module";
 import {SmartadminInputModule} from "../shared/forms/input/smartadmin-input.module";
+import {ShopService} from "../shared/api/shop.service";
+import {XSRFStrategy, CookieXSRFStrategy} from '@angular/http';
+import {CategoryService} from "../shared/api/category.service";
+import {CityService} from "../shared/api/city.service";
+import {OrganizationService} from "../shared/api/organization.service";
 
 @NgModule({
-  imports: [
-      CommonModule,
-      shopRouting,
-      SmartadminValidationModule,
-      SmartadminDatatableModule,
-      SmartadminEditorsModule,
-      SmartadminInputModule,
-      SmartadminModule
-  ],
-  declarations: [ShopComponent,ListShopComponent,AddShopComponent]
+    imports: [
+        CommonModule,
+        shopRouting,
+        SmartadminValidationModule,
+        SmartadminDatatableModule,
+        SmartadminEditorsModule,
+        SmartadminInputModule,
+        SmartadminModule
+    ],
+    declarations: [ShopComponent,ListShopComponent,AddShopComponent],
+    providers:[ShopService,CategoryService,CityService,OrganizationService,
+        { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('token', 'Token') }]
 })
 export class ShopModule { }

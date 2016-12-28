@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-12">
 
-            <form #shopForm="ngForm" (ngSubmit)="login(shopForm.value)" novalidate="novalidate"
+            <form #shopForm="ngForm" (ngSubmit)="sendForm(shopForm.value)" novalidate="novalidate"
                   class="smart-form client-form" style="background: white;">
 
                 <fieldset *ngIf="user.admin==true">
@@ -15,7 +15,7 @@
                         <section class="col col-6">
                             <label class="label">Translit</label>
                             <label class="input"> <i class="icon-append fa fa-qq"></i>
-                                <input type="text" name="translit" placeholder="Транслит"
+                                <input type="text" name="seo_translit" placeholder="Транслит"
                                        required ngModel>
                                 <b class="tooltip tooltip-bottom-right">Транслит</b>
                             </label>
@@ -23,7 +23,7 @@
                         <section class="col col-6">
                             <label class="label">Title</label>
                             <label class="input"> <i class="icon-append fa fa-qq"></i>
-                                <input type="text" name="title" placeholder="Заголовок страницы"
+                                <input type="text" name="seo_title" placeholder="Заголовок страницы"
                                        required ngModel>
                                 <b class="tooltip tooltip-bottom-right">Title</b>
                             </label>
@@ -41,7 +41,7 @@
                         <section class="col col-6">
                             <label class="label">Keywords</label>
                             <label class="input"> <i class="icon-append fa fa-qq"></i>
-                                <input type="text" name="seo_keywords" placeholder="Ключевые слова"
+                                <input type="text" name="seo_keys" placeholder="Ключевые слова"
                                        required ngModel>
                                 <b class="tooltip tooltip-bottom-right">Keywords</b>
                             </label>
@@ -54,7 +54,8 @@
                                 <select type="text" name="city"
                                         class="form-control"
                                         required ngModel>
-                                    <option>Казань</option>
+                                    <option *ngFor="let org of organizationService.organizations"
+                                            value="{{org.id}}">{{org.name}}</option>
                                 </select>
                                 <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Организация
@@ -117,7 +118,8 @@
                                 <select type="text" name="city"
                                         class="form-control"
                                        required ngModel>
-                                    <option>Казань</option>
+                                    <option *ngFor="let city of cityService.cities"
+                                            value="{{city.id}}">{{city.name}}</option>
                                 </select>
                                 <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Город
@@ -130,7 +132,8 @@
                                 <select type="text" name="city"
                                         class="form-control"
                                         required ngModel>
-                                    <option>Казань</option>
+                                    <option *ngFor="let type of categoryService.categories"
+                                            value="{{type.id}}">{{type.name}}</option>
                                 </select>
                                 <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Категория
@@ -343,7 +346,7 @@
                 </fieldset>
 
                 <footer>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" [disabled]="disabled">
                         Добавить
                     </button>
                 </footer>

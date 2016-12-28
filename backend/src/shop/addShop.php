@@ -1,5 +1,20 @@
 <?php
+$active = false;
+if($user->haveRole("admin")){
+    $active = true;
+}
+$sth = $pdo->prepare("SELECT 1 res FROM shops WHERE seo_translit = :SEO_TRANSLIT");
+$sth->bindParam(":SEO_TRANSLIT", $data->seo_translit, PDO::PARAM_STR);
+if($sth->execute()){
+    $res = $sth->fetch(PDO::FETCH_ASSOC);
+    if($res["res"]==1){
+        s_error::show("Транслит должен быть уникальным");
+    }
+}else{
+    s_error::show("Ошибка бд");
+}
 
+die;
 $sql = "INSERT INTO shops(name,address,phone,site,inst,vk,city_id,organization_id,"
             . "user_id,short_desc,description,parking,alcohol,food,veranda,"
             . "console,board,lat,lon,enabled,active,seo_title,seo_desc,"
@@ -53,7 +68,7 @@ $sth->bindParam(":BOARD", $data->shop->board, PDO::PARAM_BOOL);
 $sth->bindParam(":LAT", $data->shop->lat, PDO::PARAM_STR);
 $sth->bindParam(":LON", $data->shop->lon, PDO::PARAM_STR);
 $sth->bindParam(":ENABLED", $data->shop->enabled, PDO::PARAM_BOOL);
-$sth->bindParam(":ACTIVE", $data->shop->active, PDO::PARAM_BOOL);
+$sth->bindParam(":ACTIVE", $active, PDO::PARAM_BOOL);
 $sth->bindParam(":SEO_TITLE", $data->shop->seo_title, PDO::PARAM_STR);
 $sth->bindParam(":SEO_DESC", $data->shop->seo_desc, PDO::PARAM_STR);
 $sth->bindParam(":SEO_KEYS", $data->shop->seo_keys, PDO::PARAM_STR);

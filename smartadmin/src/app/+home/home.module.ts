@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { homeRouting } from './home.routing';
 import {SmartadminModule} from "../shared/smartadmin.module";
 import {HomeComponent} from "./home.component";
+import { AuthGuard }        from '../shared/api/auth-guard.service';
 
 @NgModule({
   imports: [
@@ -10,6 +11,7 @@ import {HomeComponent} from "./home.component";
     homeRouting,
       SmartadminModule
   ],
-  declarations: [HomeComponent]
+  declarations: [HomeComponent],
+  providers:[AuthGuard]
 })
 export class HomeModule { }

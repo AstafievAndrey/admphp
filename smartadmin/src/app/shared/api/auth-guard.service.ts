@@ -6,7 +6,6 @@ import {
     CanActivateChild
 }                           from '@angular/router';
 import {CookieService} from "angular2-cookie/services/cookies.service";
-import {config} from '../smartadmin.config';
 
 import {JsonApiService} from "./json-api.service";
 
@@ -37,6 +36,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 if(data.s_error!==undefined){
                     this.router.navigate(['/auth']);
                 }else{
+                    console.log();
                     this.cookieService.put("token",data.token);
                 }
             },

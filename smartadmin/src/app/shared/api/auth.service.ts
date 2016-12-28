@@ -15,7 +15,5 @@ export class AuthService {
     public login(form:any){
         return this.jsonApiService.post("//api.kalyan.space/auth",form);
     }
-    
-    
   
 }
