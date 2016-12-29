@@ -14,7 +14,7 @@ if($sth->execute()){
     s_error::show("Ошибка бд");
 }
 
-die;
+s_error::show("S_ERROR");
 $sql = "INSERT INTO shops(name,address,phone,site,inst,vk,city_id,organization_id,"
             . "user_id,short_desc,description,parking,alcohol,food,veranda,"
             . "console,board,lat,lon,enabled,active,seo_title,seo_desc,"

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CookieService} from "angular2-cookie/services/cookies.service";
 import {ShopService} from "../../shared/api/shop.service";
 import {CategoryService} from "../../shared/api/category.service";
@@ -12,10 +12,18 @@ declare var $:any;
 })
 export class AddShopComponent implements OnInit {
 
-    shedule:any[];
-    numbers:number[];
     user:any;
     disabled:boolean = false;
+    public validationOptions: any = {
+        messages: {
+            name: {required: 'Пожалуйста, заполните обязательное поле'},
+            address: {required: 'Пожалуйста, заполните обязательное поле'},
+            phone: {required: 'Пожалуйста, заполните обязательное поле'},
+            short_desc: {required: 'Пожалуйста, заполните обязательное поле'},
+            city_id: {required: 'Пожалуйста, заполните обязательное поле'},
+            category_id: {required: 'Пожалуйста, заполните обязательное поле'},
+        }
+    };
 
     constructor(
         private cookieService:CookieService,
@@ -25,27 +33,25 @@ export class AddShopComponent implements OnInit {
         private organizationService:OrganizationService,
     ) {
         this.user = this.cookieService.getObject("user");
+        if(this.user.admin == true){
+            this.validationOptions.messages.seo_translit = {required: 'Пожалуйста, заполните обязательное поле'};
+            this.validationOptions.messages.seo_title = {required: 'Пожалуйста, заполните обязательное поле'};
+            this.validationOptions.messages.seo_desc = {required: 'Пожалуйста, заполните обязательное поле'};
+            this.validationOptions.messages.seo_keys = {required: 'Пожалуйста, заполните обязательное поле'};
+            this.validationOptions.messages.org_id = {required: 'Пожалуйста, заполните обязательное поле'};
+        }
     }
 
     ngOnInit() {
         this.categoryService.getCategories(1);
         this.cityService.getCities();
         if (this.user.admin == true) this.organizationService.getOrganizations();
-        this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
-        this.shedule = [
-          {id:1,name:"Понедельник",type_work:"1"},
-          {id:2,name:"Вторник",type_work:"1"},
-          {id:3,name:"Среда",type_work:"1"},
-          {id:4,name:"Четверг",type_work:"1"},
-          {id:5,name:"Пятница",type_work:"1"},
-          {id:6,name:"Суббота",type_work:"1"},
-          {id:7,name:"Воскресенье",type_work:"1"}
-        ];
+        this.shopService.emptyShop();
     }
 
     sendForm(form:any){
         this.disabled = true;
-        this.shopService.addShop(form)
+        this.shopService.addShop(form.value)
           .subscribe(
               data => {
                   if(data.s_error != undefined){

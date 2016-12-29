@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-12">
 
-            <form #shopForm="ngForm" (ngSubmit)="sendForm(shopForm.value)" novalidate="novalidate"
+            <form #shopForm="ngForm" (ngSubmit)="sendForm(shopForm)" [saUiValidate]="validationOptions" novalidate="novalidate"
                   class="smart-form client-form" style="background: white;">
 
                 <fieldset *ngIf="user.admin==true">
@@ -15,8 +15,8 @@
                         <section class="col col-6">
                             <label class="label">Translit</label>
                             <label class="input"> <i class="icon-append fa fa-qq"></i>
-                                <input type="text" name="seo_translit" placeholder="Транслит"
-                                       required ngModel>
+                                <input type="text" name="seo_tran" placeholder="Транслит"
+                                       required [ngModel]="shopService.shop.seo_translit">
                                 <b class="tooltip tooltip-bottom-right">Транслит</b>
                             </label>
                         </section>
@@ -24,7 +24,7 @@
                             <label class="label">Title</label>
                             <label class="input"> <i class="icon-append fa fa-qq"></i>
                                 <input type="text" name="seo_title" placeholder="Заголовок страницы"
-                                       required ngModel>
+                                       required [ngModel]="shopService.shop.seo_title">
                                 <b class="tooltip tooltip-bottom-right">Title</b>
                             </label>
                         </section>
@@ -34,7 +34,7 @@
                             <label class="label">Description</label>
                             <label class="input"> <i class="icon-append fa fa-qq"></i>
                                 <input type="text" name="seo_desc" placeholder="Описание страницы"
-                                       required ngModel>
+                                       required [ngModel]="shopService.shop.seo_desc">
                                 <b class="tooltip tooltip-bottom-right">Description</b>
                             </label>
                         </section>
@@ -42,7 +42,7 @@
                             <label class="label">Keywords</label>
                             <label class="input"> <i class="icon-append fa fa-qq"></i>
                                 <input type="text" name="seo_keys" placeholder="Ключевые слова"
-                                       required ngModel>
+                                       required [ngModel]="shopService.shop.seo_keys">
                                 <b class="tooltip tooltip-bottom-right">Keywords</b>
                             </label>
                         </section>
@@ -51,9 +51,9 @@
                         <section class="col col-6">
                             <label class="label">Организация</label>
                             <label class="input">
-                                <select type="text" name="city"
+                                <select type="text" name="org_id"
                                         class="form-control"
-                                        required ngModel>
+                                        required [ngModel]="shopService.shop.org_id">
                                     <option *ngFor="let org of organizationService.organizations"
                                             value="{{org.id}}">{{org.name}}</option>
                                 </select>
@@ -72,7 +72,7 @@
                             <label class="label">Название</label>
                             <label class="input"> <i class="icon-append fa fa-bank"></i>
                                 <input type="text" name="name" placeholder="Название кальянной"
-                                       required ngModel>
+                                       required [ngModel]="shopService.shop.name">
                                 <b class="tooltip tooltip-bottom-right">Название</b>
                             </label>
                         </section>
@@ -80,7 +80,7 @@
                             <label class="label">Адрес</label>
                             <label class="input"> <i class="icon-append fa fa-road"></i>
                                 <input type="text" name="address" placeholder="Укажите адрес заведения"
-                                       required ngModel>
+                                       required [ngModel]="shopService.shop.address">
                                 <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Адрес
                                 </b>
@@ -91,10 +91,10 @@
                         <section class="col col-6">
                             <label class="label">Телефон</label>
                             <label class="input"> <i class="icon-append fa fa-phone"></i>
-                                <input type="text" name="phone" placeholder="Укажите ваш телефон"
+                                <input type="text" id="phone" name="phone" placeholder="Укажите ваш телефон"
                                        saMaskedInput="(999) 999-9999"
                                        saMaskedPlaceholder="X"
-                                       required ngModel>
+                                       required [ngModel]="shopService.shop.phone">
                                 <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Телефон
                                 </b>
@@ -104,7 +104,7 @@
                             <label class="label">Краткое описание</label>
                             <label class="input"> <i class="icon-append fa fa-file-text-o"></i>
                                 <input type="text" name="short_desc" placeholder="Краткое описание заведения"
-                                       required ngModel>
+                                       required [ngModel]="shopService.shop.short_desc">
                                 <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Краткое описание
                                 </b>
@@ -115,9 +115,9 @@
                         <section class="col col-6">
                             <label class="label">Город</label>
                             <label class="input">
-                                <select type="text" name="city"
+                                <select type="text" name="city_id"
                                         class="form-control"
-                                       required ngModel>
+                                       required [ngModel]="shopService.shop.city_id">
                                     <option *ngFor="let city of cityService.cities"
                                             value="{{city.id}}">{{city.name}}</option>
                                 </select>
@@ -129,9 +129,9 @@
                         <section class="col col-6">
                             <label class="label">Категория</label>
                             <label class="input">
-                                <select type="text" name="city"
+                                <select type="text" name="category_id"
                                         class="form-control"
-                                        required ngModel>
+                                        required [ngModel]="shopService.shop.category_id">
                                     <option *ngFor="let type of categoryService.categories"
                                             value="{{type.id}}">{{type.name}}</option>
                                 </select>
@@ -145,7 +145,7 @@
                         <label class="label">Сайт</label>
                         <label class="input"> <i class="icon-append fa fa-dribbble"></i>
                             <input type="text" name="site" placeholder="Оставьте адрес сайта"
-                                   required ngModel>
+                                   [ngModel]="shopService.shop.site">
                             <b class="tooltip tooltip-top-right">
                                 <i class="fa fa-lock txt-color-teal"></i> Сайт
                             </b>
@@ -155,7 +155,7 @@
                         <label class="label">Вконтакте</label>
                         <label class="input"> <i class="icon-append fa  fa-vk"></i>
                             <input type="text" name="vk" placeholder="Укажите группу в вк"
-                                   required ngModel>
+                                   [ngModel]="shopService.shop.vk">
                             <b class="tooltip tooltip-top-right">
                                 <i class="fa fa-lock txt-color-teal"></i> Вконтакте
                             </b>
@@ -165,7 +165,7 @@
                         <label class="label">Инстаграм</label>
                         <label class="input"> <i class="icon-append fa fa-instagram"></i>
                             <input type="text" name="inst" placeholder="Оставьте ссылку на ваш аккаунт в инстаграмме"
-                                   required ngModel>
+                                   [ngModel]="shopService.shop.inst">
                             <b class="tooltip tooltip-top-right">
                                 <i class="fa fa-lock txt-color-teal"></i> Инстаграм
                             </b>
@@ -178,7 +178,7 @@
                                 <label>
                                     <input type="radio" id="alcohol1" class="radiobox style-0"
                                            name="alcohol"
-                                           value="true" ngModel>
+                                           value="true" [ngModel]="shopService.shop.alcohol">
                                     <span>Да</span>
                                 </label>
                             </div>
@@ -186,7 +186,7 @@
                                 <label>
                                     <input type="radio" id="alcohol0" class="radiobox style-0"
                                            name="alcohol"
-                                           value="false" ngModel>
+                                           value="false" [ngModel]="shopService.shop.alcohol">
                                     <span>Нет</span>
                                 </label>
                             </div>
@@ -197,7 +197,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0" checked="checked"
                                            name="food"
-                                           value="true" ngModel>
+                                           value="true" [ngModel]="shopService.shop.food">
                                     <span>Да</span>
                                 </label>
                             </div>
@@ -205,7 +205,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0"
                                            name="food"
-                                           value="false" ngModel>
+                                           value="false" [ngModel]="shopService.shop.food">
                                     <span>Нет</span>
                                 </label>
                             </div>
@@ -216,7 +216,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0" checked="checked"
                                            name="veranda"
-                                           value="true" ngModel>
+                                           value="true" [ngModel]="shopService.shop.veranda">
                                     <span>Да</span>
                                 </label>
                             </div>
@@ -224,7 +224,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0"
                                            name="veranda"
-                                           value="false" ngModel>
+                                           value="false" [ngModel]="shopService.shop.veranda">
                                     <span>Нет</span>
                                 </label>
                             </div>
@@ -235,7 +235,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0" checked="checked"
                                            name="parking"
-                                           value="true" ngModel>
+                                           value="true" [ngModel]="shopService.shop.parking">
                                     <span>Да</span>
                                 </label>
                             </div>
@@ -243,7 +243,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0"
                                            name="parking"
-                                           value="false" ngModel>
+                                           value="false" [ngModel]="shopService.shop.parking">
                                     <span>Нет</span>
                                 </label>
                             </div>
@@ -254,7 +254,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0" checked="checked"
                                            name="board"
-                                           value="true" ngModel>
+                                           value="true" [ngModel]="shopService.shop.board">
                                     <span>Да</span>
                                 </label>
                             </div>
@@ -262,7 +262,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0"
                                            name="board"
-                                           value="false" ngModel>
+                                           value="false" [ngModel]="shopService.shop.board">
                                     <span>Нет</span>
                                 </label>
                             </div>
@@ -273,7 +273,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0" checked="checked"
                                         name="game"
-                                        value="true" ngModel>
+                                        value="true" [ngModel]="shopService.shop.game">
                                     <span>Да</span>
                                 </label>
                             </div>
@@ -281,7 +281,7 @@
                                 <label>
                                     <input type="radio" class="radiobox style-0"
                                            name="game"
-                                           value="false" ngModel>
+                                           value="false" [ngModel]="shopService.shop.game">
                                     <span>Нет</span>
                                 </label>
                             </div>
@@ -293,13 +293,13 @@
                             <textarea type="text" name="description" class="form-control"
                                       style="max-width: 100%"
                                       placeholder="Оставьте описание" rows="5"
-                                   required ngModel>
+                                   required [ngModel]="shopService.shop.description">
                             </textarea>
                         </label>
                     </section>
                     <section>
                         <div class="form-group">
-                            <div *ngFor="let shed of shedule" class="col-md-2 col-sm-3 col-xs-6">
+                            <div *ngFor="let shed of shopService.shop.shedule" class="col-md-2 col-sm-3 col-xs-6">
                                 <strong class="radio">{{shed.name}}</strong>
                                 <div class="radio">
                                     <label>
@@ -324,7 +324,7 @@
                                             [(ngModel)]="shed.work_begin"
                                             id="work_b_{{shed.id}}"
                                             class="form-control">
-                                        <option *ngFor="let number of numbers"
+                                        <option *ngFor="let number of shopService.numbers"
                                                 value="{{number}}">{{number}}
                                         </option>
                                     </select>
@@ -335,7 +335,7 @@
                                             [(ngModel)]="shed.work_end"
                                             id="work_e_{{shed.id}}"
                                             class="form-control">
-                                        <option *ngFor="let number of numbers"
+                                        <option *ngFor="let number of shopService.numbers"
                                                 value="{{number}}">{{number}}
                                         </option>
                                     </select>
@@ -346,7 +346,7 @@
                 </fieldset>
 
                 <footer>
-                    <button type="submit" class="btn btn-primary" [disabled]="disabled">
+                    <button type="submit" class="btn btn-primary" [disabled]="(disabled)">
                         Добавить
                     </button>
                 </footer>

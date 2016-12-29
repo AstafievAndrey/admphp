@@ -14,6 +14,7 @@ import {XSRFStrategy, CookieXSRFStrategy} from '@angular/http';
 import {CategoryService} from "../shared/api/category.service";
 import {CityService} from "../shared/api/city.service";
 import {OrganizationService} from "../shared/api/organization.service";
+import {Zippy} from "./zippy";
 
 @NgModule({
     imports: [
@@ -23,9 +24,9 @@ import {OrganizationService} from "../shared/api/organization.service";
         SmartadminDatatableModule,
         SmartadminEditorsModule,
         SmartadminInputModule,
-        SmartadminModule
+        SmartadminModule,
     ],
-    declarations: [ShopComponent,ListShopComponent,AddShopComponent],
+    declarations: [ShopComponent,ListShopComponent,AddShopComponent,Zippy],
     providers:[ShopService,CategoryService,CityService,OrganizationService,
         { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('token', 'Token') }]
 })
