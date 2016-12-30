@@ -1,6 +1,8 @@
 <?php
-
-//var_dump($data);
+$active = false;
+if($user->haveRole("admin")){
+    $active = true;
+}
 
 $sql = "UPDATE shops SET "
             . "name             = :NAME,"
@@ -20,33 +22,35 @@ $sql = "UPDATE shops SET "
             . "veranda          = :VERANDA,"
             . "console          = :CONSOLE,"
             . "board            = :BOARD,"
-//            . "lat              = :LAT,"
-//            . "lon              = :LOT,"
+            . "lat              = :LAT,"
+            . "lon              = :LOT,"
             . "enabled          = :ENABLED,"
             . "active           = :ACTIVE "
         . "WHERE id = :ID";
 
 $sth = $pdo->prepare($sql);
-$sth->bindParam(":ID",$data->shop->id,PDO::PARAM_INT);
-$sth->bindParam(":NAME",$data->shop->name,PDO::PARAM_STR);
-$sth->bindParam(":ADDRESS",$data->shop->address,PDO::PARAM_STR);
-$sth->bindParam(":PHONE",$data->shop->phone,PDO::PARAM_STR);
-$sth->bindParam(":SITE",$data->shop->site,PDO::PARAM_STR);
-$sth->bindParam(":INST",$data->shop->inst,PDO::PARAM_STR);
-$sth->bindParam(":VK",$data->shop->vk,PDO::PARAM_STR);
-$sth->bindParam(":CITY_ID",$data->shop->city_id,PDO::PARAM_INT);
-$sth->bindParam(":ORG_ID",$data->user->org_id,PDO::PARAM_INT);
-$sth->bindParam(":USER_ID",$data->user->id,PDO::PARAM_INT);
-$sth->bindParam(":SHORT_DESC",$data->shop->short_desc,PDO::PARAM_STR);
-$sth->bindParam(":DESC",$data->shop->desc,PDO::PARAM_STR);
-$sth->bindParam(":PARKING",$data->shop->parking,PDO::PARAM_BOOL);
-$sth->bindParam(":ALCOHOL",$data->shop->alcohol,PDO::PARAM_BOOL);
-$sth->bindParam(":FOOD",$data->shop->food,PDO::PARAM_BOOL);
-$sth->bindParam(":VERANDA",$data->shop->veranda,PDO::PARAM_BOOL);
-$sth->bindParam(":CONSOLE",$data->shop->console,PDO::PARAM_BOOL);
-$sth->bindParam(":BOARD",$data->shop->board,PDO::PARAM_BOOL);
-$sth->bindParam(":ENABLED",$data->shop->enabled,PDO::PARAM_BOOL);
-$sth->bindParam(":ACTIVE",$data->shop->active,PDO::PARAM_BOOL);
+$sth->bindParam(":ID",$data->id,PDO::PARAM_INT);
+$sth->bindParam(":NAME",$data->name,PDO::PARAM_STR);
+$sth->bindParam(":ADDRESS",$data->address,PDO::PARAM_STR);
+$sth->bindParam(":PHONE",$data->phone,PDO::PARAM_STR);
+$sth->bindParam(":SITE",$data->site,PDO::PARAM_STR);
+$sth->bindParam(":INST",$data->inst,PDO::PARAM_STR);
+$sth->bindParam(":VK",$data->vk,PDO::PARAM_STR);
+$sth->bindParam(":CITY_ID",$data->city_id,PDO::PARAM_INT);
+$sth->bindParam(":ORG_ID",$user->org,PDO::PARAM_INT);
+$sth->bindParam(":USER_ID",$user->id,PDO::PARAM_INT);
+$sth->bindParam(":SHORT_DESC",$data->short_desc,PDO::PARAM_STR);
+$sth->bindParam(":DESC",$data->description,PDO::PARAM_STR);
+$sth->bindParam(":PARKING",$data->parking,PDO::PARAM_BOOL);
+$sth->bindParam(":ALCOHOL",$data->alcohol,PDO::PARAM_BOOL);
+$sth->bindParam(":FOOD",$data->food,PDO::PARAM_BOOL);
+$sth->bindParam(":VERANDA",$data->veranda,PDO::PARAM_BOOL);
+$sth->bindParam(":CONSOLE",$data->console,PDO::PARAM_BOOL);
+$sth->bindParam(":BOARD",$data->board,PDO::PARAM_BOOL);
+$sth->bindParam(":LAT",$data->lat,PDO::PARAM_STR);
+$sth->bindParam(":LON",$data->lon,PDO::PARAM_STR);
+$sth->bindParam(":ENABLED",$data->enabled,PDO::PARAM_BOOL);
+$sth->bindParam(":ACTIVE",$active,PDO::PARAM_BOOL);
 
 if($sth->execute()){
     

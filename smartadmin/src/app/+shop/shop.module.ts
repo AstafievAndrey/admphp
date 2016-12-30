@@ -4,8 +4,6 @@ import { shopRouting } from './shop.routing';
 import { SmartadminValidationModule } from "../shared/forms/validation/smartadmin-validation.module";
 import {SmartadminModule} from "../shared/smartadmin.module";
 import {ShopComponent} from "./shop.component";
-import {ListShopComponent} from "./components/listShop.component";
-import {AddShopComponent} from "./components/addShop.component";
 import {SmartadminDatatableModule} from "../shared/ui/datatable/smartadmin-datatable.module";
 import {SmartadminEditorsModule} from "../shared/forms/editors/smartadmin-editors.module";
 import {SmartadminInputModule} from "../shared/forms/input/smartadmin-input.module";
@@ -14,7 +12,10 @@ import {XSRFStrategy, CookieXSRFStrategy} from '@angular/http';
 import {CategoryService} from "../shared/api/category.service";
 import {CityService} from "../shared/api/city.service";
 import {OrganizationService} from "../shared/api/organization.service";
-import {Zippy} from "./zippy";
+
+import {EditShopComponent} from "./components/editShop.component";
+import {ListShopComponent} from "./components/listShop.component";
+import {AddShopComponent} from "./components/addShop.component";
 
 @NgModule({
     imports: [
@@ -26,7 +27,7 @@ import {Zippy} from "./zippy";
         SmartadminInputModule,
         SmartadminModule,
     ],
-    declarations: [ShopComponent,ListShopComponent,AddShopComponent,Zippy],
+    declarations: [ShopComponent,ListShopComponent,AddShopComponent,EditShopComponent],
     providers:[ShopService,CategoryService,CityService,OrganizationService,
         { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('token', 'Token') }]
 })

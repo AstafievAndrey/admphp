@@ -14,11 +14,15 @@ if($sth->execute()){
     s_error::show("Ошибка бд");
 }
 
-s_error::show("S_ERROR");
-$sql = "INSERT INTO shops(name,address,phone,site,inst,vk,city_id,organization_id,"
-            . "user_id,short_desc,description,parking,alcohol,food,veranda,"
-            . "console,board,lat,lon,enabled,active,seo_title,seo_desc,"
-            . "seo_keys,seo_translit,file_id) "
+$sql = "INSERT INTO shops("
+            . "name,address,phone,"
+            . "site,inst,vk,city_id,"
+            . "organization_id,user_id,short_desc,"
+            . "description,parking,alcohol,"
+            . "food,veranda,console,"
+            . "board,lat,lon,"
+            . "enabled,active,seo_title,"
+            . "seo_desc,seo_keys,seo_translit) "
         . "VALUES("
             . ":NAME,"
             . ":ADDRESS,"
@@ -39,52 +43,50 @@ $sql = "INSERT INTO shops(name,address,phone,site,inst,vk,city_id,organization_i
             . ":BOARD,"
             . ":LAT,"
             . ":LON,"
-            . ":ENABLED,"
+            . "true,"
             . ":ACTIVE,"
             . ":SEO_TITLE,"
             . ":SEO_DESC,"
             . ":SEO_KEYS,"
-            . ":SEO_TRANSLIT,"
-            . ":FILE_ID"
+            . ":SEO_TRANSLIT"
         . ") returning id ";
 $sth = $pdo->prepare($sql);
-$sth->bindParam(":NAME", $data->shop->name, PDO::PARAM_STR);
-$sth->bindParam(":ADDRESS", $data->shop->address, PDO::PARAM_STR);
-$sth->bindParam(":PHONE", $data->shop->phone, PDO::PARAM_STR);
-$sth->bindParam(":SITE", $data->shop->site, PDO::PARAM_STR);
-$sth->bindParam(":INST", $data->shop->inst, PDO::PARAM_STR);
-$sth->bindParam(":VK", $data->shop->vk, PDO::PARAM_STR);
-$sth->bindParam(":CITY_ID", $data->shop->city_id, PDO::PARAM_INT);
-$sth->bindParam(":ORGANIZATION_ID", $data->user->org_id, PDO::PARAM_INT);
-$sth->bindParam(":USER_ID", $data->user->id, PDO::PARAM_INT);
-$sth->bindParam(":SHORT_DESC", $data->shop->short_desc, PDO::PARAM_STR);
-$sth->bindParam(":DESCRIPTION", $data->shop->desc, PDO::PARAM_STR);
-$sth->bindParam(":PARKING", $data->shop->parking, PDO::PARAM_BOOL);
-$sth->bindParam(":ALCOHOL", $data->shop->alcohol, PDO::PARAM_BOOL);
-$sth->bindParam(":FOOD", $data->shop->food, PDO::PARAM_BOOL);
-$sth->bindParam(":VERANDA", $data->shop->veranda, PDO::PARAM_BOOL);
-$sth->bindParam(":CONSOLE", $data->shop->console, PDO::PARAM_BOOL);
-$sth->bindParam(":BOARD", $data->shop->board, PDO::PARAM_BOOL);
-$sth->bindParam(":LAT", $data->shop->lat, PDO::PARAM_STR);
-$sth->bindParam(":LON", $data->shop->lon, PDO::PARAM_STR);
-$sth->bindParam(":ENABLED", $data->shop->enabled, PDO::PARAM_BOOL);
+$sth->bindParam(":NAME", $data->name, PDO::PARAM_STR);
+$sth->bindParam(":ADDRESS", $data->address, PDO::PARAM_STR);
+$sth->bindParam(":PHONE", $data->phone, PDO::PARAM_STR);
+$sth->bindParam(":SITE", $data->site, PDO::PARAM_STR);
+$sth->bindParam(":INST", $data->inst, PDO::PARAM_STR);
+$sth->bindParam(":VK", $data->vk, PDO::PARAM_STR);
+$sth->bindParam(":CITY_ID", $data->city_id, PDO::PARAM_INT);
+$sth->bindParam(":ORGANIZATION_ID", $user->org, PDO::PARAM_INT);
+$sth->bindParam(":USER_ID", $user->id, PDO::PARAM_INT);
+$sth->bindParam(":SHORT_DESC", $data->short_desc, PDO::PARAM_STR);
+$sth->bindParam(":DESCRIPTION", $data->description, PDO::PARAM_STR);
+$sth->bindParam(":PARKING", $data->parking, PDO::PARAM_BOOL);
+$sth->bindParam(":ALCOHOL", $data->alcohol, PDO::PARAM_BOOL);
+$sth->bindParam(":FOOD", $data->food, PDO::PARAM_BOOL);
+$sth->bindParam(":VERANDA", $data->veranda, PDO::PARAM_BOOL);
+$sth->bindParam(":CONSOLE", $data->console, PDO::PARAM_BOOL);
+$sth->bindParam(":BOARD", $data->board, PDO::PARAM_BOOL);
+$sth->bindParam(":LAT", $data->lat, PDO::PARAM_STR);
+$sth->bindParam(":LON", $data->lon, PDO::PARAM_STR);
+$sth->bindParam(":ENABLED", $data->enabled, PDO::PARAM_BOOL);
 $sth->bindParam(":ACTIVE", $active, PDO::PARAM_BOOL);
-$sth->bindParam(":SEO_TITLE", $data->shop->seo_title, PDO::PARAM_STR);
-$sth->bindParam(":SEO_DESC", $data->shop->seo_desc, PDO::PARAM_STR);
-$sth->bindParam(":SEO_KEYS", $data->shop->seo_keys, PDO::PARAM_STR);
+$sth->bindParam(":SEO_TITLE", $data->seo_title, PDO::PARAM_STR);
+$sth->bindParam(":SEO_DESC", $data->seo_desc, PDO::PARAM_STR);
+$sth->bindParam(":SEO_KEYS", $data->seo_keys, PDO::PARAM_STR);
 
-$sth->bindParam(":FILE_ID", $data->shop->file_id, PDO::PARAM_INT);
-$sth->bindParam(":SEO_TRANSLIT", $data->shop->seo_translit, PDO::PARAM_STR);
+//$sth->bindParam(":FILE_ID", $data->shop->file_id, PDO::PARAM_INT);
+$sth->bindParam(":SEO_TRANSLIT", $data->seo_translit, PDO::PARAM_STR);
 
 if($sth->execute()){
     $res = $sth->fetchAll(PDO::FETCH_ASSOC);
     $sql = "INSERT INTO shops_categories(shop_id,category_id) VALUES(:SHOP_ID,:CATEGORY_ID)";
     $sth = $pdo->prepare($sql);
     $sth->bindParam(":SHOP_ID",$res[0]["id"],PDO::PARAM_INT);
-    $sth->bindParam(":CATEGORY_ID",$data->shop->category_id,PDO::PARAM_INT);
+    $sth->bindParam(":CATEGORY_ID",$data->category_id,PDO::PARAM_INT);
     if($sth->execute()){
-        foreach ($data->shop->shedule as $key => $value) {
-            $id = ((int)$value->id)+1;
+        foreach ($data->shedule as $key => $value) {
             if((int)$value->type_work==3){
                 $sth = $pdo->prepare("INSERT INTO shedule(shop_id,day_id,type_work,work_begin,work_end) "
                         . "VALUES(:SHOP_ID,:DAY_ID,:TYPE_WORK,:WORK_BEGIN,:WORK_END)");
@@ -94,7 +96,7 @@ if($sth->execute()){
                 $sth = $pdo->prepare("INSERT INTO shedule(shop_id,day_id,type_work) VALUES(:SHOP_ID,:DAY_ID,:TYPE_WORK)");
             }
             $sth->bindParam(":SHOP_ID",$res[0]["id"],PDO::PARAM_INT);
-            $sth->bindParam(":DAY_ID",$id,PDO::PARAM_INT);
+            $sth->bindParam(":DAY_ID",$value->id,PDO::PARAM_INT);
             $sth->bindParam(":TYPE_WORK",$value->type_work,PDO::PARAM_INT);
             $sth->execute();
         }

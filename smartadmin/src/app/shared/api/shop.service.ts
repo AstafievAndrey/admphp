@@ -17,37 +17,49 @@ export class ShopService {
         return this.jsonApiService.post("//api.kalyan.space/addShop",form);
     }
 
+    public getShop(id:number){
+        return this.jsonApiService.post("//api.kalyan.space/getShop",{id:id});
+    }
+
+    public editShop(form:any){
+        return this.jsonApiService.post("//api.kalyan.space/editShop",form);
+    }
+
     public emptyShop(){
         this.shop = {
-            seo_translit:"",
-            seo_title:"",
-            seo_desc:"",
-            seo_keys:"",
-            org_id:"",
-            name:"",
-            address:"",
-            phone:"",
-            short_desc:"",
-            city_id:"",
-            category_id:"",
-            site:"",
-            vk:"",
-            inst:"",
+            id:null,
+            seo_translit:null,
+            seo_title:null,
+            seo_desc:null,
+            seo_keys:null,
+            org_id:null,
+            name:null,
+            address:null,
+            phone:null,
+            short_desc:null,
+            city_id:null,
+            category_id:null,
+            organization_id:null,
+            site:null,
+            vk:null,
+            inst:null,
             alcohol:"false",
             food:"false",
             veranda:"false",
             parking:"false",
             board:"false",
-            game:"false",
-            description:"",
+            console:"false",
+            description:null,
+            lat:null,
+            lon:null,
             shedule:[
-                    {id:1,name:"Понедельник",type_work:"1"},
-                    {id:2,name:"Вторник",type_work:"1"},
-                    {id:3,name:"Среда",type_work:"1"},
-                    {id:4,name:"Четверг",type_work:"1"},
-                    {id:5,name:"Пятница",type_work:"1"},
-                    {id:6,name:"Суббота",type_work:"1"},
-                    {id:7,name:"Воскресенье",type_work:"1"}
+                    {id:1,name:"Понедельник",type_work:"1",work_begin:"1",work_end:"1"},
+                    {id:2,name:"Вторник",type_work:"1",work_begin:"1",work_end:"1"},
+                    {id:3,name:"Среда",type_work:"1",work_begin:"1",work_end:"1"},
+                    {id:4,name:"Четверг",type_work:"1",work_begin:"1",work_end:"1"},
+                    {id:5,name:"Пятница",type_work:"1",work_begin:"1",work_end:"1"},
+                    {id:6,name:"Суббота",type_work:"1",work_begin:"1",work_end:"1"},
+                    {id:7,name:"Воскресенье",type_work:"1",work_begin:"1",work_end:"1"}
                 ]
         }
     }

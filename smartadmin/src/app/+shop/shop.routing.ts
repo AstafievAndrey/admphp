@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import {ListShopComponent} from "./components/listShop.component";
 import {AddShopComponent} from "./components/addShop.component";
+import {EditShopComponent} from "./components/editShop.component";
 
 export const shopRoutes: Routes = [
     {
@@ -17,6 +18,10 @@ export const shopRoutes: Routes = [
     {
         path:'addShop',
         component:AddShopComponent
+    },
+    {
+        path:'editShop/:id',
+        component:EditShopComponent
     }
 ];
 
