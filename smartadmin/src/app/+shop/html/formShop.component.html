@@ -69,7 +69,7 @@
                         <section class="col col-6">
                             <label class="label">Организация</label>
                             <label class="input">
-                                <select type="text" name="org_id"
+                                <select type="text" name="organization_id"
                                         class="form-control"
                                         required [(ngModel)]="shopService.shop.organization_id">
                                     <option *ngFor="let org of organizationService.organizations"
@@ -125,7 +125,7 @@
                             <label class="label">Краткое описание</label>
                             <label class="input"> <i class="icon-append fa fa-file-text-o"></i>
                                 <input type="text" name="short_desc" placeholder="Краткое описание заведения"
-                                       required [ngModel]="shopService.shop.short_desc">
+                                       required [(ngModel)]="shopService.shop.short_desc">
                                 <b class="tooltip tooltip-top-right">
                                     <i class="fa fa-lock txt-color-teal"></i> Краткое описание
                                 </b>

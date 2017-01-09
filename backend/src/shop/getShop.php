@@ -43,7 +43,7 @@ if($sth->execute()){
     }else{
         s_error::show("Ошибка выбора категории");
     }
-    $sql = "SELECT t1.day_id-1 id, t2.name, t1.type_work, coalesce(t1.work_begin,1) work_begin, coalesce(t1.work_end,24) work_end "
+    $sql = "SELECT t1.day_id id, t2.name, t1.type_work, coalesce(t1.work_begin,1) work_begin, coalesce(t1.work_end,24) work_end "
             . "FROM shedule t1 "
             . "JOIN days_week t2 on t2.id = t1.day_id "
             . "WHERE t1.shop_id = :SHOP_ID";

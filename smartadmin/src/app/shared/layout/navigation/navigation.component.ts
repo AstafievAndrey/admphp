@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CookieService} from "angular2-cookie/services/cookies.service";
 import {LoginInfoComponent} from "../../user/login-info/login-info.component";
 
 
@@ -9,7 +10,10 @@ import {LoginInfoComponent} from "../../user/login-info/login-info.component";
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() {
+  user:any;
+
+  constructor(private cookieService:CookieService) {
+    this.user = this.cookieService.getObject("user");
   }
 
   ngOnInit() {

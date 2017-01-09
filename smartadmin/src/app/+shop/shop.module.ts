@@ -8,7 +8,6 @@ import {SmartadminDatatableModule} from "../shared/ui/datatable/smartadmin-datat
 import {SmartadminEditorsModule} from "../shared/forms/editors/smartadmin-editors.module";
 import {SmartadminInputModule} from "../shared/forms/input/smartadmin-input.module";
 import {ShopService} from "../shared/api/shop.service";
-import {XSRFStrategy, CookieXSRFStrategy} from '@angular/http';
 import {CategoryService} from "../shared/api/category.service";
 import {CityService} from "../shared/api/city.service";
 import {OrganizationService} from "../shared/api/organization.service";
@@ -28,7 +27,6 @@ import {AddShopComponent} from "./components/addShop.component";
         SmartadminModule,
     ],
     declarations: [ShopComponent,ListShopComponent,AddShopComponent,EditShopComponent],
-    providers:[ShopService,CategoryService,CityService,OrganizationService,
-        { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('token', 'Token') }]
+    providers:[ShopService,CategoryService,CityService,OrganizationService]
 })
 export class ShopModule { }

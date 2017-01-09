@@ -1,7 +1,7 @@
 <?php
-$active = false;
+$admin = false;
 if($user->haveRole("admin")){
-    $active = true;
+    $admin = true;
 }
 $sth = $pdo->prepare("SELECT 1 res FROM shops WHERE seo_translit = :SEO_TRANSLIT");
 $sth->bindParam(":SEO_TRANSLIT", $data->seo_translit, PDO::PARAM_STR);
@@ -58,7 +58,7 @@ $sth->bindParam(":SITE", $data->site, PDO::PARAM_STR);
 $sth->bindParam(":INST", $data->inst, PDO::PARAM_STR);
 $sth->bindParam(":VK", $data->vk, PDO::PARAM_STR);
 $sth->bindParam(":CITY_ID", $data->city_id, PDO::PARAM_INT);
-$sth->bindParam(":ORGANIZATION_ID", $user->org, PDO::PARAM_INT);
+$sth->bindParam(":ORGANIZATION_ID", (($admin)?$data->organization_id:$user->org), PDO::PARAM_INT);
 $sth->bindParam(":USER_ID", $user->id, PDO::PARAM_INT);
 $sth->bindParam(":SHORT_DESC", $data->short_desc, PDO::PARAM_STR);
 $sth->bindParam(":DESCRIPTION", $data->description, PDO::PARAM_STR);
@@ -71,7 +71,7 @@ $sth->bindParam(":BOARD", $data->board, PDO::PARAM_BOOL);
 $sth->bindParam(":LAT", $data->lat, PDO::PARAM_STR);
 $sth->bindParam(":LON", $data->lon, PDO::PARAM_STR);
 $sth->bindParam(":ENABLED", $data->enabled, PDO::PARAM_BOOL);
-$sth->bindParam(":ACTIVE", $active, PDO::PARAM_BOOL);
+$sth->bindParam(":ACTIVE", $admin, PDO::PARAM_BOOL);
 $sth->bindParam(":SEO_TITLE", $data->seo_title, PDO::PARAM_STR);
 $sth->bindParam(":SEO_DESC", $data->seo_desc, PDO::PARAM_STR);
 $sth->bindParam(":SEO_KEYS", $data->seo_keys, PDO::PARAM_STR);
