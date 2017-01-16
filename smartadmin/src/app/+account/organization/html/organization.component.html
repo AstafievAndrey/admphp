@@ -1,0 +1,12 @@
+<div id="content">
+    <div class="row">
+        <div class="col-sm-4">
+            <a routerLink="/account/organization/add" class="btn btn-primary">Добавить</a>
+        </div>
+    </div>
+    <div class="row" *ngFor="let organization of this.organizationService.organizations">
+        <div class="col-sm-12">
+            <h3>{{organization.name}}</h3>
+        </div>
+    </div>
+</div>

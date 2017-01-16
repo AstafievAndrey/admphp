@@ -23,7 +23,23 @@
             {
                 "src":"shop/getShop.php"
             },
-            
+    
+    "addUser":
+            {
+                "src":"user/addUser.php",
+                "auth":true
+            }, 
+    "listUsers":
+            {
+                "src":"user/listUsers.php"
+            }, 
+    
+    
+    "addOrganization":
+            {
+                "src":"organization/addOrganization.php",
+                "auth":true
+            }, 
     "listOrganizations":
             {
                 "src":"organization/listOrganizations.php"

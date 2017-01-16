@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-sm-12">
+
+        <form #organizationForm="ngForm" (ngSubmit)="sendForm()" [saUiValidate]="validationOptions" novalidate="novalidate"
+              class="smart-form client-form" style="background: white;">
+
+            <fieldset>
+                <div class="row">
+                    <section class="col col-6">
+                        <label class="label">Название</label>
+                        <label class="input"> <i class="icon-append fa fa-bank"></i>
+                            <input type="text" name="name" placeholder="Название организации"
+                                   required [(ngModel)]="organizationService.organization.name">
+                            <b class="tooltip tooltip-bottom-right">Название</b>
+                        </label>
+                    </section>
+                    <section class="col col-6">
+                        <label class="label">Адрес</label>
+                        <label class="input"> <i class="icon-append fa fa-road"></i>
+                            <input type="text" name="address" placeholder="Укажите адрес заведения"
+                                   required [(ngModel)]="organizationService.organization.address">
+                            <b class="tooltip tooltip-top-right">
+                                <i class="fa fa-lock txt-color-teal"></i> Адрес
+                            </b>
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-6">
+                        <label class="label">Телефон</label>
+                        <label class="input"> <i class="icon-append fa fa-phone"></i>
+                            <input type="text" id="phone" name="phone" placeholder="Укажите ваш телефон"
+                                   required [(ngModel)]="organizationService.organization.phone">
+                            <b class="tooltip tooltip-top-right">
+                                <i class="fa fa-lock txt-color-teal"></i> Телефон
+                            </b>
+                        </label>
+                    </section>
+                    <section class="col col-6">
+                        <label class="label">Email</label>
+                        <label class="input"> <i class="icon-append fa fa-file-text-o"></i>
+                            <input type="text" name="email" placeholder="Укажите электронную почту"
+                                   required [(ngModel)]="organizationService.organization.email">
+                            <b class="tooltip tooltip-top-right">
+                                <i class="fa fa-lock txt-color-teal"></i> email
+                            </b>
+                        </label>
+                    </section>
+                </div>
+            </fieldset>
+
+            <footer>
+                <!--[disabled]="(disabled||shopForm.form.invalid)"-->
+                <button type="submit" class="btn btn-primary" [disabled]="(disabled||organizationForm.form.invalid)">
+                    Добавить
+                </button>
+            </footer>
+
+        </form>
+
+    </div>
+</div>

@@ -15,6 +15,7 @@ import {OrganizationService} from "../shared/api/organization.service";
 import {EditShopComponent} from "./components/editShop.component";
 import {ListShopComponent} from "./components/listShop.component";
 import {AddShopComponent} from "./components/addShop.component";
+import {XSRFStrategy, CookieXSRFStrategy} from "@angular/http";
 
 @NgModule({
     imports: [
@@ -27,6 +28,9 @@ import {AddShopComponent} from "./components/addShop.component";
         SmartadminModule,
     ],
     declarations: [ShopComponent,ListShopComponent,AddShopComponent,EditShopComponent],
-    providers:[ShopService,CategoryService,CityService,OrganizationService]
+    providers:[
+        ShopService,CategoryService,CityService,OrganizationService,
+        { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('token', 'Token') }
+    ]
 })
 export class ShopModule { }

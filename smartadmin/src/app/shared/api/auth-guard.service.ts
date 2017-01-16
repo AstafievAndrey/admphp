@@ -36,7 +36,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 if(data.s_error!==undefined){
                     this.router.navigate(['/auth']);
                 }else{
-                    console.log();
                     this.cookieService.put("token",data.token);
                 }
             },
