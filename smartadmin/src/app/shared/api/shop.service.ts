@@ -4,6 +4,7 @@ import {JsonApiService} from "./json-api.service";
 @Injectable()
 export class ShopService {
 
+    public shops:any;
     public shop:any;
     public numbers:number[];
 
@@ -19,6 +20,14 @@ export class ShopService {
 
     public getShop(id:number){
         return this.jsonApiService.post("//api.kalyan.space/getShop",{id:id});
+    }
+
+    private getListShop(){
+        return this.jsonApiService.post("//api.kalyan.space/listShop",{})
+    }
+
+    public listShop(){
+        this.getListShop().subscribe(data=>{this.shops = data});
     }
 
     public editShop(form:any){

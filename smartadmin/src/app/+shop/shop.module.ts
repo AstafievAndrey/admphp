@@ -12,6 +12,8 @@ import {CategoryService} from "../shared/api/category.service";
 import {CityService} from "../shared/api/city.service";
 import {OrganizationService} from "../shared/api/organization.service";
 
+import {DataTableModule} from "angular2-datatable";
+
 import {EditShopComponent} from "./components/editShop.component";
 import {ListShopComponent} from "./components/listShop.component";
 import {AddShopComponent} from "./components/addShop.component";
@@ -21,6 +23,7 @@ import {XSRFStrategy, CookieXSRFStrategy} from "@angular/http";
     imports: [
         CommonModule,
         shopRouting,
+        DataTableModule,
         SmartadminValidationModule,
         SmartadminDatatableModule,
         SmartadminEditorsModule,

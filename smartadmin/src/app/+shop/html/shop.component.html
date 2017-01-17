@@ -6,10 +6,49 @@
     <div class="row">
         <div class="col-sm-12">
             <a class="btn btn-primary" routerLink="/shop/addShop">Добавить</a>
-            <a class="btn btn-primary" routerLink="/shop/editShop/1121">Редактировать</a>
         </div>
         <div class="col-sm-12">
 
+            <table class="table table-striped" [mfData]="shopService.shops" #mf="mfDataTable" [mfRowsOnPage]="5">
+                <thead>
+                <tr>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="name">name</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="address">address</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="phone">phone</mfDefaultSorter>
+                    </th>
+                    <th style="width: 10%">
+                        <mfDefaultSorter by="active">active</mfDefaultSorter>
+                    </th>
+                    <th style="width: 10%">
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of mf.data">
+                    <td>{{item.name}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.active}}</td>
+                    <td>
+                        <a class="btn btn-primary" routerLink="/shop/editShop/{{item.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+
+            <!--
             <sa-widget [editbutton]="false" color="blueDark">
                 <div>
                     <div class="widget-body no-padding">
@@ -28,7 +67,8 @@
                                  {data: 'name'},
                                  {data: 'address'},
                                  {data: 'phone'},
-                                 {data: 'active'}
+                                 {data: 'active'},
+                                 {data: 'edit'}
                             ]}"
                                 tableClass="table table-striped table-bordered table-hover">
                             <thead>
@@ -38,6 +78,7 @@
                                     <th data-hide="phone">Адрес</th>
                                     <th data-hide="phone,tablet">Телефон</th>
                                     <th data-hide="phone,tablet">Статус</th>
+                                    <th data-hide="phone,tablet"></th>
                                 </tr>
                             </thead>
                         </sa-datatable>
@@ -45,7 +86,7 @@
                     </div>
                 </div>
             </sa-widget>
-
+            -->
         </div>
     </div>
 </div>

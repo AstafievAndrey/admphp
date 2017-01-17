@@ -32,7 +32,8 @@ export class UserService {
         this.user = {
             email:null,
             password:null,
-            organization_id:null
+            organization_id:null,
+            role_id:null
         }
     }
 
